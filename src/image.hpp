@@ -12,7 +12,7 @@
 
 #include "logical_device.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     std::vector<VkImage> createImages(LogicalDevice*        pLogicalDevice,
                                       uint32_t              count,
@@ -29,6 +29,6 @@ namespace vkBasalt
     void changeImageLayout(LogicalDevice* pLogicalDevice, std::vector<VkImage> images, uint32_t mipLevels = 1);
 
     void generateMipMaps(LogicalDevice* pLogicalDevice, VkCommandBuffer commandBuffer, VkImage image, VkExtent3D extent, uint32_t mipLevels);
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // IMAGE_HPP_INCLUDED
