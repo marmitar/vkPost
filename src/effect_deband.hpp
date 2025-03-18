@@ -13,7 +13,7 @@
 #include "effect_simple.hpp"
 #include "config.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     class DebandEffect : public SimpleEffect
     {
@@ -26,6 +26,6 @@ namespace vkBasalt
                      Config*              pConfig);
         ~DebandEffect();
     };
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // EFFECT_DEBAND_HPP_INCLUDED
