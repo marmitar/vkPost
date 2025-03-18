@@ -3,7 +3,7 @@
 #include "format.hpp"
 #include "util.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     std::vector<VkCommandBuffer> allocateCommandBuffer(LogicalDevice* pLogicalDevice, uint32_t count)
     {
@@ -27,7 +27,7 @@ namespace vkBasalt
         return commandBuffers;
     }
     void writeCommandBuffers(LogicalDevice*                                 pLogicalDevice,
-                             std::vector<std::shared_ptr<vkBasalt::Effect>> effects,
+                             std::vector<std::shared_ptr<vkPost::Effect>> effects,
                              VkImage                                        depthImage,
                              VkImageView                                    depthImageView,
                              VkFormat                                       depthFormat,
@@ -125,4 +125,4 @@ namespace vkBasalt
         return semaphores;
     }
 
-} // namespace vkBasalt
+} // namespace vkPost
