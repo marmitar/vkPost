@@ -13,7 +13,7 @@
 #include "effect_simple.hpp"
 #include "config.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     class FxaaEffect : public SimpleEffect
     {
@@ -26,6 +26,6 @@ namespace vkBasalt
                    Config*              pConfig);
         ~FxaaEffect();
     };
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // EFFECT_FXAA_HPP_INCLUDED
