@@ -10,15 +10,12 @@ license=('zlib')
 depends=('gcc-libs' 'glslang' 'libx11')
 makedepends=('meson' 'ninja' 'spirv-headers' 'vulkan-headers')
 optdepends=('reshade-shaders-git')
-source=("${url}/releases/download/v${pkgver}/vkPost-${pkgver}.tar.gz"
-        "vkpost-gcc13-fix.patch::https://github.com/KowabungaOfficial/vkPost/blob/main/AUR/vkpost-gcc13-fix.patch")
-sha256sums=('d57fb8034420ba729249df89f7966f69ca5c8e47a160b1ec414b0cf7a494e91e'
-            '97e7fc594261356670580d4714a461e1caf954bcb5994d4b03ea788855d16707')
+source=("${url}/releases/download/v${pkgver}/vkPost-${pkgver}.tar.gz")
+sha256sums=('d57fb8034420ba729249df89f7966f69ca5c8e47a160b1ec414b0cf7a494e91e')
 install=vkpost.install
 
 prepare() {
-  cd ${srcdir}/vkPost-${pkgver}
-  patch -Np1 -i ../vkpost-gcc13-fix.patch
+  cd "${srcdir}/vkPost-${pkgver}"
   sed -i 's|/path/to/reshade-shaders/Textures|/opt/reshade/textures|g' \
     "config/vkPost.conf"
   sed -i 's|/path/to/reshade-shaders/Shaders|/opt/reshade/shaders|g' \
@@ -26,7 +23,7 @@ prepare() {
 }
 
 build() {
-  cd ${srcdir}/vkPost-${pkgver}
+  cd "${srcdir}/vkPost-${pkgver}"
 
   arch-meson \
     --buildtype=release \
@@ -35,7 +32,7 @@ build() {
 }
 
 package() {
-  cd ${srcdir}/vkPost-${pkgver}
+  cd "${srcdir}/vkPost-${pkgver}"
 
   DESTDIR="${pkgdir}" ninja -C build install
   install -Dm 644 config/vkPost.conf "${pkgdir}/usr/share/vkPost/vkPost.conf.example"
