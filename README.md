@@ -136,7 +136,7 @@ By default the logger outputs to stderr, a file as output location can be set wi
 ## FAQ
 
 #### Why is it called vkPost?
-Based on vkBasalt, but takes the word Basalt out for Post, which hints at Post-Processing
+Based on vkBasalt, but takes the word Basalt out for Post, which hints at Post-Processing.
 #### Does vkPost work with dxvk and vkd3d?
 Yes.
 #### Will there be a openGl version?
