@@ -40,7 +40,15 @@ vkPost_src = [
 
 x11_dep = dependency('x11')
 
-# X11/X.h library contains many definitions...
+conf_paths = configuration_data()
+conf_paths.set_quoted('SYSCONFDIR', join_paths(get_option('prefix'), get_option('sysconfdir')))
+conf_paths.set_quoted('DATADIR', join_paths(get_option('prefix'), get_option('datadir')))
+
+configure_file(output: 'config_paths.hpp',
+               configuration : conf_paths)
+
+# X11/X.h library contains many definitions (e.g. None)
+# which conflicts with the rest codebase with with Meson --unity=on option
 keyboard_input_x11_lib = static_library('keyboard_input_x11', 'keyboard_input_x11.cpp')
 
 shared_library(meson.project_name().to_lower(), 
