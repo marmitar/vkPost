@@ -1,7 +1,7 @@
 subdir('shader')
 subdir('reshade')
 
-vkBasalt_src = [
+vkPost_src = [
     'basalt.cpp',
     'buffer.cpp',
     'command_buffer.cpp',
@@ -52,9 +52,9 @@ configure_file(output: 'config_paths.hpp',
 keyboard_input_x11_lib = static_library('keyboard_input_x11', 'keyboard_input_x11.cpp')
 
 shared_library(meson.project_name().to_lower(), 
-    vkBasalt_src, shader_include,
+    vkPost_src, shader_include,
     link_with: [keyboard_input_x11_lib],
-    include_directories : vkBasalt_include_path,
+    include_directories : vkPost_include_path,
     dependencies : [x11_dep, reshade_dep],
     gnu_symbol_visibility: 'hidden',
     install : true,
