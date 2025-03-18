@@ -13,7 +13,7 @@
 
 #include "logical_device.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     // for each swapchain, we have the Images and the other stuff we need to execute the compute shader
     struct LogicalSwapchain
@@ -34,6 +34,6 @@ namespace vkBasalt
 
         void destroy();
     };
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // LOGICAL_SWAPCHAIN_HPP_INCLUDED
