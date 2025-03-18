@@ -42,7 +42,7 @@
 #define VKPOST_NAME "VK_LAYER_VKPOST_post_processing"
 
 #if defined(__GNUC__) && __GNUC__ >= 4
-#define VK_BASALT_EXPORT __attribute__((visibility("default")))
+#define VK_POST_EXPORT __attribute__((visibility("default")))
 #else
 #error "Unsupported platform!"
 #endif
@@ -835,8 +835,8 @@ namespace vkPost
 extern "C"
 { // these are the entry points for the layer, so they need to be c-linkeable
 
-    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetDeviceProcAddr(VkDevice device, const char* pName);
-    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetInstanceProcAddr(VkInstance instance, const char* pName);
+    VK_POST_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetDeviceProcAddr(VkDevice device, const char* pName);
+    VK_POST_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetInstanceProcAddr(VkInstance instance, const char* pName);
 
 #define GETPROCADDR(func) \
     if (!std::strcmp(pName, "vk" #func)) \
@@ -875,7 +875,7 @@ extern "C"
         GETPROCADDR(BindImageMemory); \
     }
 
-    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetDeviceProcAddr(VkDevice device, const char* pName)
+    VK_POST_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetDeviceProcAddr(VkDevice device, const char* pName)
     {
         if (vkPost::pConfig == nullptr)
         {
@@ -890,7 +890,7 @@ extern "C"
         }
     }
 
-    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetInstanceProcAddr(VkInstance instance, const char* pName)
+    VK_POST_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetInstanceProcAddr(VkInstance instance, const char* pName)
     {
         if (vkPost::pConfig == nullptr)
         {
