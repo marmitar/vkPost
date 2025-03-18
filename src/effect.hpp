@@ -9,7 +9,7 @@
 
 #include "vulkan_include.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     class Effect
     {
@@ -21,6 +21,6 @@ namespace vkBasalt
 
     private:
     };
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // EFFECT_HPP_INCLUDED
