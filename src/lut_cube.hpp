@@ -9,7 +9,7 @@
 #include <unordered_map>
 #include <cstdlib>
 
-namespace vkBasalt
+namespace vkPost
 {
     /*
        reads .cube files
@@ -60,5 +60,5 @@ namespace vkBasalt
         std::string skipWhiteSpace(std::string text);
     };
 
-} // namespace vkBasalt
+} // namespace vkPost
 #endif // LUT_CUBE_HPP_INCLUDED
