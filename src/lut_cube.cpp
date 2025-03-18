@@ -2,7 +2,7 @@
 
 #include "logger.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     LutCube::LutCube()
     {
@@ -121,4 +121,4 @@ namespace vkBasalt
         colorCube[locationR + 1] = g;
         colorCube[locationR + 2] = b;
     }
-} // namespace vkBasalt
+} // namespace vkPost
