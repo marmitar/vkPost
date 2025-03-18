@@ -1,6 +1,6 @@
 #include "effect_transfer.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     TransferEffect::TransferEffect(LogicalDevice*       pLogicalDevice,
                                    VkFormat             format,
@@ -85,4 +85,4 @@ namespace vkBasalt
     {
     }
 
-} // namespace vkBasalt
+} // namespace vkPost
