@@ -36,4 +36,4 @@ namespace vkPost
         ASSERT_VULKAN(result);
     }
 
-} // namespace vkBasalt
+} // namespace vkPost
