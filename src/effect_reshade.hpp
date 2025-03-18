@@ -20,7 +20,7 @@
 #include "reshade/effect_codegen.hpp"
 #include "reshade/effect_preprocessor.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     class ReshadeEffect : public Effect
     {
@@ -105,6 +105,6 @@ namespace vkBasalt
         VkBlendOp     convertReshadeBlendOp(reshadefx::pass_blend_op blendOp);
         VkBlendFactor convertReshadeBlendFactor(reshadefx::pass_blend_func blendFactor);
     };
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // EFFECT_RESHADE_HPP_INCLUDED
