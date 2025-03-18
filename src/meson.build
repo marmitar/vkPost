@@ -2,7 +2,6 @@ subdir('shader')
 subdir('reshade')
 
 vkPost_src = [
-    'basalt.cpp',
     'buffer.cpp',
     'command_buffer.cpp',
     'config.cpp',
@@ -28,6 +27,7 @@ vkPost_src = [
     'logical_swapchain.cpp',
     'lut_cube.cpp',
     'memory.cpp',
+    'post.cpp',
     'renderpass.cpp',
     'reshade_uniforms.cpp',
     'sampler.cpp',
