@@ -9,7 +9,7 @@
 #include <memory>
 #include <functional>
 
-namespace vkBasalt
+namespace vkPost
 {
 
     enum class LogLevel : uint32_t
@@ -57,6 +57,6 @@ namespace vkBasalt
         static std::string getFileName();
     };
 
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // LOGGER_HPP_INCLUDED
