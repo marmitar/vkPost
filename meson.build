@@ -6,27 +6,26 @@ project('vkPost', ['c', 'cpp'],
 
 cpp = meson.get_compiler('cpp')
 
+# Define include directories for vkPost (only 'src' for now, adjust as needed)
 vkPost_include_path = include_directories('src')
 
 lib_dir = get_option('libdir')
-ld_lib_dir_vkpost = join_paths(get_option('prefix'), lib_dir)
+ld_lib_dir_vkpost = join_paths(get_option('prefix'), lib_dir)  # Default: e.g., /usr/lib
 
 if get_option('append_libdir_vkpost')
     lib_dir = join_paths(lib_dir, 'vkpost')
-    ld_lib_dir_vkpost = join_paths(ld_lib_dir_vkpost, 'vkpost')
+    ld_lib_dir_vkpost = join_paths(ld_lib_dir_vkpost, 'vkpost')  # e.g., /usr/lib/vkpost
 endif
 
-# Create configuration_data object
-conf_data = configuration_data()
-conf_data.set('ld_lib_dir_vkpost', ld_lib_dir_vkpost)
-
-# This line MUST be AFTER the definition of ld_lib_dir_vkpost and conf_data
-subdir('config')
-
+# Process subdirectories based on options
 if get_option('with_so')
     subdir('src')
 else
     if get_option('with_json')
         warning('with_json is enabled but with_so is disabled; JSON will be installed without a library.')
     endif
+endif
+
+if get_option('with_json')
+    subdir('config')
 endif
