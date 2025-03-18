@@ -13,7 +13,7 @@
 #include "effect_simple.hpp"
 #include "config.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     class LutEffect : public SimpleEffect
     {
@@ -35,6 +35,6 @@ namespace vkBasalt
         VkDescriptorPool      lutDescriptorPool;
         VkDescriptorSet       lutDescriptorSet;
     };
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // EFFECT_LUT_HPP_INCLUDED
