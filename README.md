@@ -100,8 +100,11 @@ The config file will be searched for in the following locations:
 If you want to make changes for one game only, you can create a file named `vkPost.conf` in the working directory of the game and change the values there.
 
 #### Quick override
-To override some of the default config options the `VKPOST_CONFIG` env var can be used, e.g. `VKPOST_CONFIG='effects=fxaa:cas;casSharpness=1.0'`.
-The separator is `;`
+To override some default config options use `VKPOST_CONFIG`,
+
+Here is an example, along with how to seperate effects by adding `;` 
+ 
+`VKPOST_CONFIG='effects=smaa:cas;casSharpness=1.0'`
 
 #### Reshade Fx shaders
 
@@ -118,12 +121,14 @@ reshadeIncludePath = /home/user/reshade-shaders/Shaders
 
 #### Ingame Input
 
-The [HOME key](https://en.wikipedia.org/wiki/Home_key) can be used to disable and re-enable the applied effects, the key can also be changed in the config file. This is based on X11 so it won't work on pure wayland. It **should** however at least not crash without X11.
+The [HOME](https://en.wikipedia.org/wiki/Home_key) key can be used to disable and re-enable the applied effects, the key can also be changed in the config file. This is based on X11 so it won't work on pure wayland. It **should** however at least not crash without X11.
 
 
 #### Debug Output
 
-The amount of debug output can be set with the `VKPOST_LOG_LEVEL` env var, e.g. `VKPOST_LOG_LEVEL=debug`. Possible values are: `trace, debug, info, warn, error, none`.
+The amount of debug output can be set with the `VKPOST_LOG_LEVEL` environment variable, e.g. `VKPOST_LOG_LEVEL=debug`. 
+
+Possible values are: `trace, debug, info, warn, error, none`.
 
 By default the logger outputs to stderr, a file as output location can be set with the `VKPOST_LOG_FILE` env var, e.g. `VKPOST_LOG_FILE="vkPost.log"`.
 
