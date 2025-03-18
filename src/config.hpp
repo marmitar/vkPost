@@ -10,7 +10,7 @@
 
 #include "vulkan_include.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     class Config
     {
@@ -39,6 +39,6 @@ namespace vkBasalt
         void parseOption(const std::string& option, std::string& result);
         void parseOption(const std::string& option, std::vector<std::string>& result);
     };
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // CONFIG_HPP_INCLUDED
