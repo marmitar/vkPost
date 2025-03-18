@@ -2,7 +2,7 @@
 #include "memory.hpp"
 #include "format.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     std::vector<VkImage> createFakeSwapchainImages(LogicalDevice*           pLogicalDevice,
                                                    VkSwapchainCreateInfoKHR swapchainCreateInfo,
@@ -80,4 +80,4 @@ namespace vkBasalt
         }
         return fakeImages;
     }
-} // namespace vkBasalt
+} // namespace vkPost
