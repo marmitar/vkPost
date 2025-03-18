@@ -13,7 +13,7 @@
 
 const std::string defaultRuntimePathnamePrefix = "/tmp/shader_runtime_";
 
-namespace vkBasalt
+namespace vkPost
 {
     void enumerateReshadeUniforms(reshadefx::module module)
     {
@@ -497,4 +497,4 @@ namespace vkBasalt
     RuntimeUniform::~RuntimeUniform()
     {
     }
-} // namespace vkBasalt
+} // namespace vkPost
