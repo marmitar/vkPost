@@ -5,7 +5,7 @@
 #include <sstream>
 #include <vector>
 
-namespace vkBasalt
+namespace vkPost
 {
     void addUniqueCString(std::vector<const char*>& stringVector, const char* addString);
 
@@ -32,6 +32,6 @@ namespace vkBasalt
         ss << object;
         return ss.str();
     }
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // UTIL_HPP_INCLUDED
