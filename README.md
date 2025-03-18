@@ -70,7 +70,7 @@ ENABLE_VKPOST=1 yourgame
 If you've enabled vkPost globally, you can disable it for a specific application using:
 
 ```ini
-DISABLE_VKBASALT=1 yourgame
+DISABLE_VKPOST=1 yourgame
 ```
 
 ### Lutris
