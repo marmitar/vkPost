@@ -1118,8 +1118,8 @@ namespace vkPost
 
     void ReshadeEffect::createReshadeModule()
     {
-        std::string tempFile  = "/tmp/vkBasalt.spv";
-        std::string tempFile2 = "/tmp/vkBasalt.spv";
+        std::string tempFile  = "/tmp/vkPost.spv";
+        std::string tempFile2 = "/tmp/vkPost.spv";
 
         reshadefx::preprocessor preprocessor;
         preprocessor.add_macro_definition("__RESHADE__", std::to_string(INT_MAX));
