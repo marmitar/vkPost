@@ -3,8 +3,8 @@
 #include <cstdint>
 #include <string>
 
-namespace vkBasalt
+namespace vkPost
 {
     uint32_t convertToKeySym(std::string key);
     bool     isKeyPressed(uint32_t ks);
-} // namespace vkBasalt
+} // namespace vkPost
