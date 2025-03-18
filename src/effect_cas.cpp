@@ -13,7 +13,7 @@
 
 #include "shader_sources.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     CasEffect::CasEffect(LogicalDevice*       pLogicalDevice,
                          VkFormat             format,
@@ -47,4 +47,4 @@ namespace vkBasalt
     CasEffect::~CasEffect()
     {
     }
-} // namespace vkBasalt
+} // namespace vkPost
