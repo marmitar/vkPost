@@ -9,7 +9,7 @@ Currently, the build in effects are:
 - 3D color LookUp Table
 
 ## Disclaimer
-This project was originally [DadSchoorse's](https://github.com/DadSchoorse/).
+This project was originally created by [DadSchoorse](https://github.com/DadSchoorse/).
 
 vkPost is a continuation of where vkBasalt left off.
 
