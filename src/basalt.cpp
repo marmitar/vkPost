@@ -39,7 +39,7 @@
 #include "effect_reshade.hpp"
 #include "effect_transfer.hpp"
 
-#define VKBASALT_NAME "VK_LAYER_VKBASALT_post_processing"
+#define VKPOST_NAME "VK_LAYER_VKPOST_post_processing"
 
 #if defined(__GNUC__) && __GNUC__ >= 4
 #define VK_BASALT_EXPORT __attribute__((visibility("default")))
@@ -47,7 +47,7 @@
 #error "Unsupported platform!"
 #endif
 
-namespace vkBasalt
+namespace vkPost
 {
     std::shared_ptr<Config> pConfig = nullptr;
 
@@ -73,7 +73,7 @@ namespace vkBasalt
         return *(void**) inst;
     }
 
-    VkResult VKAPI_CALL vkBasalt_CreateInstance(const VkInstanceCreateInfo*  pCreateInfo,
+    VkResult VKAPI_CALL vkPost_CreateInstance(const VkInstanceCreateInfo*  pCreateInfo,
                                                 const VkAllocationCallbacks* pAllocator,
                                                 VkInstance*                  pInstance)
     {
@@ -139,7 +139,7 @@ namespace vkBasalt
         return ret;
     }
 
-    void VKAPI_CALL vkBasalt_DestroyInstance(VkInstance instance, const VkAllocationCallbacks* pAllocator)
+    void VKAPI_CALL vkPost_DestroyInstance(VkInstance instance, const VkAllocationCallbacks* pAllocator)
     {
         if (!instance)
             return;
@@ -157,7 +157,7 @@ namespace vkBasalt
         instanceVersionMap.erase(GetKey(instance));
     }
 
-    VkResult VKAPI_CALL vkBasalt_CreateDevice(VkPhysicalDevice             physicalDevice,
+    VkResult VKAPI_CALL vkPost_CreateDevice(VkPhysicalDevice             physicalDevice,
                                               const VkDeviceCreateInfo*    pCreateInfo,
                                               const VkAllocationCallbacks* pAllocator,
                                               VkDevice*                    pDevice)
@@ -292,7 +292,7 @@ namespace vkBasalt
         return VK_SUCCESS;
     }
 
-    void VKAPI_CALL vkBasalt_DestroyDevice(VkDevice device, const VkAllocationCallbacks* pAllocator)
+    void VKAPI_CALL vkPost_DestroyDevice(VkDevice device, const VkAllocationCallbacks* pAllocator)
     {
         if (!device)
             return;
@@ -313,7 +313,7 @@ namespace vkBasalt
         deviceMap.erase(GetKey(device));
     }
 
-    VKAPI_ATTR VkResult VKAPI_CALL vkBasalt_CreateSwapchainKHR(VkDevice                        device,
+    VKAPI_ATTR VkResult VKAPI_CALL vkPost_CreateSwapchainKHR(VkDevice                        device,
                                                                const VkSwapchainCreateInfoKHR* pCreateInfo,
                                                                const VkAllocationCallbacks*    pAllocator,
                                                                VkSwapchainKHR*                 pSwapchain)
@@ -367,7 +367,7 @@ namespace vkBasalt
         return result;
     }
 
-    VKAPI_ATTR VkResult VKAPI_CALL vkBasalt_GetSwapchainImagesKHR(VkDevice       device,
+    VKAPI_ATTR VkResult VKAPI_CALL vkPost_GetSwapchainImagesKHR(VkDevice       device,
                                                                   VkSwapchainKHR swapchain,
                                                                   uint32_t*      pCount,
                                                                   VkImage*       pSwapchainImages)
@@ -540,7 +540,7 @@ namespace vkBasalt
         return *pCount < pLogicalSwapchain->imageCount ? VK_INCOMPLETE : VK_SUCCESS;
     }
 
-    VKAPI_ATTR VkResult VKAPI_CALL vkBasalt_QueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo)
+    VKAPI_ATTR VkResult VKAPI_CALL vkPost_QueuePresentKHR(VkQueue queue, const VkPresentInfoKHR* pPresentInfo)
     {
         scoped_lock l(globalLock);
 
@@ -609,7 +609,7 @@ namespace vkBasalt
         return pLogicalDevice->vkd.QueuePresentKHR(queue, &presentInfo);
     }
 
-    VKAPI_ATTR void VKAPI_CALL vkBasalt_DestroySwapchainKHR(VkDevice device, VkSwapchainKHR swapchain, const VkAllocationCallbacks* pAllocator)
+    VKAPI_ATTR void VKAPI_CALL vkPost_DestroySwapchainKHR(VkDevice device, VkSwapchainKHR swapchain, const VkAllocationCallbacks* pAllocator)
     {
         if (!swapchain)
             return;
@@ -625,7 +625,7 @@ namespace vkBasalt
         pLogicalDevice->vkd.DestroySwapchainKHR(device, swapchain, pAllocator);
     }
 
-    VKAPI_ATTR VkResult VKAPI_CALL vkBasalt_CreateImage(VkDevice                     device,
+    VKAPI_ATTR VkResult VKAPI_CALL vkPost_CreateImage(VkDevice                     device,
                                                         const VkImageCreateInfo*     pCreateInfo,
                                                         const VkAllocationCallbacks* pAllocator,
                                                         VkImage*                     pImage)
@@ -655,7 +655,7 @@ namespace vkBasalt
         }
     }
 
-    VKAPI_ATTR VkResult VKAPI_CALL vkBasalt_BindImageMemory(VkDevice device, VkImage image, VkDeviceMemory memory, VkDeviceSize memoryOffset)
+    VKAPI_ATTR VkResult VKAPI_CALL vkPost_BindImageMemory(VkDevice device, VkImage image, VkDeviceMemory memory, VkDeviceSize memoryOffset)
     {
         scoped_lock l(globalLock);
 
@@ -706,7 +706,7 @@ namespace vkBasalt
         return result;
     }
 
-    VKAPI_ATTR void VKAPI_CALL vkBasalt_DestroyImage(VkDevice device, VkImage image, const VkAllocationCallbacks* pAllocator)
+    VKAPI_ATTR void VKAPI_CALL vkPost_DestroyImage(VkDevice device, VkImage image, const VkAllocationCallbacks* pAllocator)
     {
         if (!image)
             return;
@@ -765,14 +765,14 @@ namespace vkBasalt
     ///////////////////////////////////////////////////////////////////////////////////////////
     // Enumeration function
 
-    VkResult VKAPI_CALL vkBasalt_EnumerateInstanceLayerProperties(uint32_t* pPropertyCount, VkLayerProperties* pProperties)
+    VkResult VKAPI_CALL vkPost_EnumerateInstanceLayerProperties(uint32_t* pPropertyCount, VkLayerProperties* pProperties)
     {
         if (pPropertyCount)
             *pPropertyCount = 1;
 
         if (pProperties)
         {
-            std::strcpy(pProperties->layerName, VKBASALT_NAME);
+            std::strcpy(pProperties->layerName, VKPOST_NAME);
             std::strcpy(pProperties->description, "a post processing layer");
             pProperties->implementationVersion = 1;
             pProperties->specVersion           = VK_MAKE_VERSION(1, 2, 0);
@@ -781,18 +781,18 @@ namespace vkBasalt
         return VK_SUCCESS;
     }
 
-    VkResult VKAPI_CALL vkBasalt_EnumerateDeviceLayerProperties(VkPhysicalDevice   physicalDevice,
+    VkResult VKAPI_CALL vkPost_EnumerateDeviceLayerProperties(VkPhysicalDevice   physicalDevice,
                                                                 uint32_t*          pPropertyCount,
                                                                 VkLayerProperties* pProperties)
     {
-        return vkBasalt_EnumerateInstanceLayerProperties(pPropertyCount, pProperties);
+        return vkPost_EnumerateInstanceLayerProperties(pPropertyCount, pProperties);
     }
 
-    VkResult VKAPI_CALL vkBasalt_EnumerateInstanceExtensionProperties(const char*            pLayerName,
+    VkResult VKAPI_CALL vkPost_EnumerateInstanceExtensionProperties(const char*            pLayerName,
                                                                       uint32_t*              pPropertyCount,
                                                                       VkExtensionProperties* pProperties)
     {
-        if (pLayerName == NULL || std::strcmp(pLayerName, VKBASALT_NAME))
+        if (pLayerName == NULL || std::strcmp(pLayerName, VKPOST_NAME))
         {
             return VK_ERROR_LAYER_NOT_PRESENT;
         }
@@ -805,13 +805,13 @@ namespace vkBasalt
         return VK_SUCCESS;
     }
 
-    VkResult VKAPI_CALL vkBasalt_EnumerateDeviceExtensionProperties(VkPhysicalDevice       physicalDevice,
+    VkResult VKAPI_CALL vkPost_EnumerateDeviceExtensionProperties(VkPhysicalDevice       physicalDevice,
                                                                     const char*            pLayerName,
                                                                     uint32_t*              pPropertyCount,
                                                                     VkExtensionProperties* pProperties)
     {
         // pass through any queries that aren't to us
-        if (pLayerName == NULL || std::strcmp(pLayerName, VKBASALT_NAME))
+        if (pLayerName == NULL || std::strcmp(pLayerName, VKPOST_NAME))
         {
             if (physicalDevice == VK_NULL_HANDLE)
             {
@@ -830,27 +830,27 @@ namespace vkBasalt
         }
         return VK_SUCCESS;
     }
-} // namespace vkBasalt
+} // namespace vkPost
 
 extern "C"
 { // these are the entry points for the layer, so they need to be c-linkeable
 
-    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkBasalt_GetDeviceProcAddr(VkDevice device, const char* pName);
-    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkBasalt_GetInstanceProcAddr(VkInstance instance, const char* pName);
+    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetDeviceProcAddr(VkDevice device, const char* pName);
+    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetInstanceProcAddr(VkInstance instance, const char* pName);
 
 #define GETPROCADDR(func) \
     if (!std::strcmp(pName, "vk" #func)) \
-        return (PFN_vkVoidFunction) &vkBasalt::vkBasalt_##func;
+        return (PFN_vkVoidFunction) &vkPost::vkPost_##func;
     /*
     Return our funktions for the funktions we want to intercept
-    the macro takes the name and returns our vkBasalt_##func, if the name is equal
+    the macro takes the name and returns our vkPost_##func, if the name is equal
     */
 
     // vkGetDeviceProcAddr needs to behave like vkGetInstanceProcAddr thanks to some games
 #define INTERCEPT_CALLS \
     /* instance chain functions we intercept */ \
     if (!std::strcmp(pName, "vkGetInstanceProcAddr")) \
-        return (PFN_vkVoidFunction) &vkBasalt_GetInstanceProcAddr; \
+        return (PFN_vkVoidFunction) &vkPost_GetInstanceProcAddr; \
     GETPROCADDR(EnumerateInstanceLayerProperties); \
     GETPROCADDR(EnumerateInstanceExtensionProperties); \
     GETPROCADDR(CreateInstance); \
@@ -858,7 +858,7 @@ extern "C"
 \
     /* device chain functions we intercept*/ \
     if (!std::strcmp(pName, "vkGetDeviceProcAddr")) \
-        return (PFN_vkVoidFunction) &vkBasalt_GetDeviceProcAddr; \
+        return (PFN_vkVoidFunction) &vkPost_GetDeviceProcAddr; \
     GETPROCADDR(EnumerateDeviceLayerProperties); \
     GETPROCADDR(EnumerateDeviceExtensionProperties); \
     GETPROCADDR(CreateDevice); \
@@ -868,40 +868,40 @@ extern "C"
     GETPROCADDR(QueuePresentKHR); \
     GETPROCADDR(DestroySwapchainKHR); \
 \
-    if (vkBasalt::pConfig->getOption<std::string>("depthCapture", "off") == "on") \
+    if (vkPost::pConfig->getOption<std::string>("depthCapture", "off") == "on") \
     { \
         GETPROCADDR(CreateImage); \
         GETPROCADDR(DestroyImage); \
         GETPROCADDR(BindImageMemory); \
     }
 
-    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkBasalt_GetDeviceProcAddr(VkDevice device, const char* pName)
+    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetDeviceProcAddr(VkDevice device, const char* pName)
     {
-        if (vkBasalt::pConfig == nullptr)
+        if (vkPost::pConfig == nullptr)
         {
-            vkBasalt::pConfig = std::shared_ptr<vkBasalt::Config>(new vkBasalt::Config());
+            vkPost::pConfig = std::shared_ptr<vkPost::Config>(new vkPost::Config());
         }
 
         INTERCEPT_CALLS
 
         {
-            vkBasalt::scoped_lock l(vkBasalt::globalLock);
-            return vkBasalt::deviceMap[vkBasalt::GetKey(device)]->vkd.GetDeviceProcAddr(device, pName);
+            vkPost::scoped_lock l(vkPost::globalLock);
+            return vkPost::deviceMap[vkPost::GetKey(device)]->vkd.GetDeviceProcAddr(device, pName);
         }
     }
 
-    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkBasalt_GetInstanceProcAddr(VkInstance instance, const char* pName)
+    VK_BASALT_EXPORT PFN_vkVoidFunction VKAPI_CALL vkPost_GetInstanceProcAddr(VkInstance instance, const char* pName)
     {
-        if (vkBasalt::pConfig == nullptr)
+        if (vkPost::pConfig == nullptr)
         {
-            vkBasalt::pConfig = std::shared_ptr<vkBasalt::Config>(new vkBasalt::Config());
+            vkPost::pConfig = std::shared_ptr<vkPost::Config>(new vkPost::Config());
         }
 
         INTERCEPT_CALLS
 
         {
-            vkBasalt::scoped_lock l(vkBasalt::globalLock);
-            return vkBasalt::instanceDispatchMap[vkBasalt::GetKey(instance)].GetInstanceProcAddr(instance, pName);
+            vkPost::scoped_lock l(vkPost::globalLock);
+            return vkPost::instanceDispatchMap[vkPost::GetKey(instance)].GetInstanceProcAddr(instance, pName);
         }
     }
 
