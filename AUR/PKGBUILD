@@ -12,7 +12,7 @@ makedepends=('meson' 'ninja' 'spirv-headers' 'vulkan-headers')
 optdepends=('reshade-shaders-git')
 source=("${url}/releases/download/v${pkgver}/vkPost-${pkgver}.tar.gz"
         "vkpost-gcc13-fix.patch::https://github.com/KowabungaOfficial/vkPost/blob/main/AUR/vkpost-gcc13-fix.patch")
-sha256sums=('15cbac85be0f3ec811aeb5496d7966a4ee96b6031ad3da510f28ce9541ba6860'
+sha256sums=('d57fb8034420ba729249df89f7966f69ca5c8e47a160b1ec414b0cf7a494e91e'
             '97e7fc594261356670580d4714a461e1caf954bcb5994d4b03ea788855d16707')
 install=vkpost.install
 
