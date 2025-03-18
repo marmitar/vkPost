@@ -17,7 +17,7 @@
 #include "SearchTex.h"
 #include "shader_sources.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     SmaaEffect::SmaaEffect(LogicalDevice*       pLogicalDevice,
                            VkFormat             format,
@@ -372,4 +372,4 @@ namespace vkBasalt
 
         pLogicalDevice->vkd.DestroySampler(pLogicalDevice->device, sampler, nullptr);
     }
-} // namespace vkBasalt
+} // namespace vkPost
