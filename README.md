@@ -140,7 +140,7 @@ Based on vkBasalt, but takes the word Basalt out for Post, which hints at Post-P
 #### Does vkPost work with dxvk and vkd3d?
 Yes.
 #### Will there be a openGl version?
-If someone comes in and adds it I will happily include it.
+I will look into it. if anyone wants to add it I will happily include it.
 #### Will you implement Wayland?
 I will look into it and if anyone wants to add it, they are free to contribute.
 #### Will there be a GUI in the future?
