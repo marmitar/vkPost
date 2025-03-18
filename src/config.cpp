@@ -4,36 +4,36 @@
 #include <sstream>
 #include <locale>
 
-namespace vkBasalt
+namespace vkPost
 {
     Config::Config()
     {
         // Custom config file path
-        const char* tmpConfEnv       = std::getenv("VKBASALT_CONFIG_FILE");
+        const char* tmpConfEnv       = std::getenv("vkPost_CONFIG_FILE");
         std::string customConfigFile = tmpConfEnv ? std::string(tmpConfEnv) : "";
 
         // Custom config string
-        const char* tmpConfStringEnv   = std::getenv("VKBASALT_CONFIG");
+        const char* tmpConfStringEnv   = std::getenv("vkPost_CONFIG");
         std::string customConfigString = tmpConfStringEnv ? std::string(tmpConfStringEnv) : "";
 
         // User config file path
         const char* tmpHomeEnv     = std::getenv("XDG_DATA_HOME");
-        std::string userConfigFile = tmpHomeEnv ? std::string(tmpHomeEnv) + "/vkBasalt/vkBasalt.conf"
-                                                : std::string(std::getenv("HOME")) + "/.local/share/vkBasalt/vkBasalt.conf";
+        std::string userConfigFile = tmpHomeEnv ? std::string(tmpHomeEnv) + "/vkPost/vkPost.conf"
+                                                : std::string(std::getenv("HOME")) + "/.local/share/vkPost/vkPost.conf";
 
         const char* tmpConfigEnv      = std::getenv("XDG_CONFIG_HOME");
-        std::string userXdgConfigFile = tmpConfigEnv ? std::string(tmpConfigEnv) + "/vkBasalt/vkBasalt.conf"
-                                                     : std::string(std::getenv("HOME")) + "/.config/vkBasalt/vkBasalt.conf";
+        std::string userXdgConfigFile = tmpConfigEnv ? std::string(tmpConfigEnv) + "/vkPost/vkPost.conf"
+                                                     : std::string(std::getenv("HOME")) + "/.config/vkPost/vkPost.conf";
 
         // Allowed config paths
         const std::array<std::string, 7> configPath = {
-            customConfigFile,                                    // custom config (VKBASALT_CONFIG_FILE=/path/to/vkBasalt.conf)
-            "vkBasalt.conf",                                     // per game config
+            customConfigFile,                                    // custom config (vkPost_CONFIG_FILE=/path/to/vkPost.conf)
+            "vkPost.conf",                                     // per game config
             userXdgConfigFile,                                   // user-global config
             userConfigFile,                                      // legacy default config
-            std::string(SYSCONFDIR) + "/vkBasalt.conf",          // system-wide config
-            std::string(SYSCONFDIR) + "/vkBasalt/vkBasalt.conf", // system-wide config (alternative)
-            std::string(DATADIR) + "/vkBasalt/vkBasalt.conf",    // legacy system-wide config
+            std::string(SYSCONFDIR) + "/vkPost.conf",          // system-wide config
+            std::string(SYSCONFDIR) + "/vkPost/vkPost.conf", // system-wide config (alternative)
+            std::string(DATADIR) + "/vkPost/vkPost.conf",    // legacy system-wide config
         };
 
         auto hasConfigFile = false;
@@ -217,4 +217,4 @@ namespace vkBasalt
             }
         }
     }
-} // namespace vkBasalt
+} // namespace vkPost
