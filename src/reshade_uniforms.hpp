@@ -13,7 +13,7 @@
 
 #include "reshade/effect_module.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     void enumerateReshadeUniforms(reshadefx::module module);
 
@@ -155,6 +155,6 @@ namespace vkBasalt
         int projId;
         key_t shmKey;
     };
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // RESHADE_UNIFORMS_HPP_INCLUDED
