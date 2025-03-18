@@ -1,5 +1,5 @@
 # vkPost
-vkPost is a Vulkan post processing layer to enhance the visual graphics of games.
+vkPost is a Vulkan post processing layer to enhance the visuals of games.
 
 Currently, the build in effects are:
 - Contrast Adaptive Sharpening
