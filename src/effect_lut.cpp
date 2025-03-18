@@ -17,7 +17,7 @@
 
 #include "shader_sources.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     LutEffect::LutEffect(LogicalDevice*       pLogicalDevice,
                          VkFormat             format,
@@ -122,4 +122,4 @@ namespace vkBasalt
             commandBuffer, VK_PIPELINE_BIND_POINT_GRAPHICS, pipelineLayout, 1, 1, &(lutDescriptorSet), 0, nullptr);
         SimpleEffect::applyEffect(imageIndex, commandBuffer);
     }
-} // namespace vkBasalt
+} // namespace vkPost
