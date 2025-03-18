@@ -9,7 +9,7 @@
 #include "vulkan_include.hpp"
 #include "vkdispatch.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     struct LogicalDevice
     {
@@ -26,6 +26,6 @@ namespace vkBasalt
         std::vector<VkFormat>    depthFormats;
         std::vector<VkImageView> depthImageViews;
     };
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // LOGICAL_DEVICE_HPP_INCLUDED
