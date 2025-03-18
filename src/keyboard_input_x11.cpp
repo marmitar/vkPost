@@ -11,7 +11,7 @@
 #include <unistd.h>
 #include <cstring>
 
-namespace vkBasalt
+namespace vkPost
 {
     uint32_t convertToKeySymX11(std::string key)
     {
@@ -60,4 +60,4 @@ namespace vkBasalt
         return !!(keys_return[kc2 >> 3] & (1 << (kc2 & 7)));
     }
 
-} // namespace vkBasalt
+} // namespace vkPost
