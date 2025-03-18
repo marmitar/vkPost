@@ -1,6 +1,6 @@
 #include "descriptor_set.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
 
     VkDescriptorPool createDescriptorPool(LogicalDevice* pLogicalDevice, const std::vector<VkDescriptorPoolSize>& poolSizes)
@@ -177,4 +177,4 @@ namespace vkBasalt
         }
         return descriptorSets;
     }
-} // namespace vkBasalt
+} // namespace vkPost
