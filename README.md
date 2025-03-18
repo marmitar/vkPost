@@ -8,10 +8,9 @@ Currently, the build in effects are:
 - Enhanced Subpixel Morphological Anti-Aliasing
 - 3D color LookUp Table
 
-It is also possible to use Reshade Fx shaders.
-
 ## Disclaimer
-This is one of my first projects ever, so expect it to have bugs. Use it at your own risk.
+This project was originally [DadSchoorse's](https://github.com/DadSchoorse/).
+vkPost is a continuation of where vkBasalt left off.
 
 ## Building from Source
 
@@ -50,11 +49,7 @@ ninja -C builddir.32 install
 
 ## Packaging status
 
-[Debian](https://tracker.debian.org/pkg/vkPost) `sudo apt install vkPost`
-
-[Fedora](https://src.fedoraproject.org/rpms/vkPost) `sudo dnf install vkPost`
-
-[Void Linux](https://github.com/void-linux/void-packages/blob/master/srcpkgs/vkPost/template) `sudo xbps-install vkPost`
+Coming Soon once adoption picks up
 
 ## Usage
 Enable the layer with the environment variable.
@@ -62,26 +57,26 @@ Enable the layer with the environment variable.
 ### Standard
 When using the terminal or an application (.desktop) file, execute:
 ```ini
-ENABLE_vkPost=1 yourgame
+ENABLE_VKPOST=1 yourgame
 ```
 
 ### Lutris
 With Lutris, follow these steps below:
 1. Right click on a game, and press `configure`.
 2. Go to the `System options` tab and scroll down to `Environment variables`.
-3. Press on `Add`, and add `ENABLE_vkPost` under `Key`, and add `1` under `Value`.
+3. Press on `Add`, and add `ENABLE_VKPOST` under `Key`, and add `1` under `Value`.
 
 ### Steam
 With Steam, edit your launch options and add:
 ```ini
-ENABLE_vkPost=1 %command% 
+ENABLE_VKPOST=1 %command% 
 ```
 
 ## Configure
 
 Settings like the CAS sharpening strength can be changed in the config file.
 The config file will be searched for in the following locations:
-* a file set with the environment variable`vkPost_CONFIG_FILE=/path/to/vkPost.conf`
+* a file set with the environment variable`VKPOST_CONFIG_FILE=/path/to/vkPost.conf`
 * `vkPost.conf` in the working directory of the game
 * `$XDG_CONFIG_HOME/vkPost/vkPost.conf` or `~/.config/vkPost/vkPost.conf` if `XDG_CONFIG_HOME` is not set
 * `$XDG_DATA_HOME/vkPost/vkPost.conf` or `~/.local/share/vkPost/vkPost.conf` if `XDG_DATA_HOME` is not set
@@ -115,28 +110,20 @@ The [HOME key](https://en.wikipedia.org/wiki/Home_key) can be used to disable an
 
 #### Debug Output
 
-The amount of debug output can be set with the `vkPost_LOG_LEVEL` env var, e.g. `vkPost_LOG_LEVEL=debug`. Possible values are: `trace, debug, info, warn, error, none`.
+The amount of debug output can be set with the `VKPOST_LOG_LEVEL` env var, e.g. `VKPOST_LOG_LEVEL=debug`. Possible values are: `trace, debug, info, warn, error, none`.
 
-By default the logger outputs to stderr, a file as output location can be set with the `vkPost_LOG_FILE` env var, e.g. `vkPost_LOG_FILE="vkPost.log"`.
+By default the logger outputs to stderr, a file as output location can be set with the `VKPOST_LOG_FILE` env var, e.g. `VKPOST_LOG_FILE="vkPost.log"`.
 
 
 ## FAQ
 
 #### Why is it called vkPost?
-It's a joke: vulkan post processing &#8594; after vulcan &#8594; basalt
+Based on vkBasalt, but takes Basalt out for Post which hints at Post-Processing
 #### Does vkPost work with dxvk and vkd3d?
 Yes.
-#### Will vkPost get me banned?
-Maybe. To my knowledge this hasn't happened yet but don't blame me if your frog dies.
 #### Will there be a openGl version?
-No. I don't know anything about openGl and I don't want to either. Also openGl has no layer system like vulkan.
+If someone comes in and adds it I will happily include it.
 #### Will there be a GUI in the future?
-Maybe, but not soon.
-#### So is vkPost just a reshade port for linux?
-Not really, most of the code was written from scratch. vkPost directly uses reshade source code for the shader compiler (thanks [@crosire](https://github.com/crosire)), but that's about it.
-#### Does every reshade shader work?
-No. Shaders that need multiple techniques do not work, there might still be problems with stencil and blending and depth buffer access isn't ready yet.
-#### You said that "depth buffer access isn't ready yet", what does this mean?
-There is a wip version that you can enable with `depthCapture = on`. It will lead to many problems especially on non nvidia hardware. Also the selected depth buffer isn't always the one you would want.
-#### Is there a way to change settings for reshade shaders?
-There is some support for it [#46](https://github.com/DadSchoorse/vkPost/pull/46). One easy way so to simply edit the shader file.
+Not for this project, but if anyone wants to make one they are free to.
+#### Can you make reshade shaders work?
+If someone wants to add it they are free to.
