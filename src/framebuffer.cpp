@@ -1,6 +1,6 @@
 #include "framebuffer.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     std::vector<VkFramebuffer>
     createFramebuffers(LogicalDevice* pLogicalDevice, VkRenderPass renderPass, VkExtent2D& extent, std::vector<std::vector<VkImageView>> imageViews)
@@ -31,4 +31,4 @@ namespace vkBasalt
         }
         return framebuffers;
     }
-} // namespace vkBasalt
+} // namespace vkPost
