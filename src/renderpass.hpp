@@ -11,7 +11,7 @@
 
 #include "logical_device.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     VkRenderPass createRenderPass(LogicalDevice* pLogicalDevice, VkFormat format);
 }
