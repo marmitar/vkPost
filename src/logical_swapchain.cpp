@@ -1,6 +1,6 @@
 #include "logical_swapchain.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     void LogicalSwapchain::destroy()
     {
@@ -29,4 +29,4 @@ namespace vkBasalt
             Logger::debug("after DestroySemaphore");
         }
     }
-} // namespace vkBasalt
+} // namespace vkPost
