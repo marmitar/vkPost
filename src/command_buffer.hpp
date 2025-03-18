@@ -12,19 +12,19 @@
 #include "logical_device.hpp"
 
 #include "effect.hpp"
-namespace vkBasalt
+namespace vkPost
 {
 
     std::vector<VkCommandBuffer> allocateCommandBuffer(LogicalDevice* pLogicalDevice, uint32_t count);
 
     void writeCommandBuffers(LogicalDevice*                                 pLogicalDevice,
-                             std::vector<std::shared_ptr<vkBasalt::Effect>> effects,
+                             std::vector<std::shared_ptr<vkPost::Effect>> effects,
                              VkImage                                        depthImage,
                              VkImageView                                    depthImageView,
                              VkFormat                                       depthFormat,
                              std::vector<VkCommandBuffer>                   commandBuffers);
 
     std::vector<VkSemaphore> createSemaphores(LogicalDevice* pLogicalDevice, uint32_t count);
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // COMMAND_BUFFER_HPP_INCLUDED
