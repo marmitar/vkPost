@@ -4,7 +4,7 @@ vulkan_layer_dir = join_paths(data_dir, 'vulkan', 'implicit_layer.d')
 configure_file(
     input: 'vkPost.json.in',
     output: 'vkPost.json',
-    configuration: {'ld_lib_dir_vkpost': ld_lib_dir_vkpost},
+    configuration: {'ld_lib_dir_vkpost': '/usr/lib'},
     install: true,
     install_dir: vulkan_layer_dir
 )
