@@ -5,7 +5,7 @@ cpp = meson.get_compiler('cpp')
 vkPost_include_path = ''
 
 lib_dir = get_option('libdir')
-ld_lib_dir_vkPost = ''
+ld_lib_dir_vkpost = ''
 
 if get_option('append_libdir_vkpost')
     lib_dir = join_paths(lib_dir, 'vkpost')
