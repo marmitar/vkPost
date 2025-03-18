@@ -1,7 +1,7 @@
 #include "buffer.hpp"
 #include "memory.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     void createBuffer(LogicalDevice*        pLogicalDevice,
                       VkDeviceSize          size,
