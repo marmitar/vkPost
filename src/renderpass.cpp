@@ -1,6 +1,6 @@
 #include "renderpass.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     VkRenderPass createRenderPass(LogicalDevice* pLogicalDevice, VkFormat format)
     {
@@ -58,4 +58,4 @@ namespace vkBasalt
 
         return renderPass;
     }
-} // namespace vkBasalt
+} // namespace vkPost
