@@ -9,11 +9,11 @@ namespace vkPost
     Config::Config()
     {
         // Custom config file path
-        const char* tmpConfEnv       = std::getenv("vkPost_CONFIG_FILE");
+        const char* tmpConfEnv       = std::getenv("VKPOST_CONFIG_FILE");
         std::string customConfigFile = tmpConfEnv ? std::string(tmpConfEnv) : "";
 
         // Custom config string
-        const char* tmpConfStringEnv   = std::getenv("vkPost_CONFIG");
+        const char* tmpConfStringEnv   = std::getenv("VKPOST_CONFIG");
         std::string customConfigString = tmpConfStringEnv ? std::string(tmpConfStringEnv) : "";
 
         // User config file path
@@ -27,7 +27,7 @@ namespace vkPost
 
         // Allowed config paths
         const std::array<std::string, 7> configPath = {
-            customConfigFile,                                    // custom config (vkPost_CONFIG_FILE=/path/to/vkPost.conf)
+            customConfigFile,                                    // custom config (VKPOST_CONFIG_FILE=/path/to/vkPost.conf)
             "vkPost.conf",                                     // per game config
             userXdgConfigFile,                                   // user-global config
             userConfigFile,                                      // legacy default config
