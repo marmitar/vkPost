@@ -11,7 +11,7 @@
 
 #include "logical_device.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     VkPipelineLayout createGraphicsPipelineLayout(LogicalDevice* pLogicalDevice, std::vector<VkDescriptorSetLayout> descriptorSetLayouts);
 
@@ -27,6 +27,6 @@ namespace vkBasalt
                                       VkPipelineLayout      pipelineLayout,
                                       bool                  flip = false);
 
-} // namespace vkBasalt
+} // namespace vkPost
 
 #endif // GRAPHICS_PIPELINE_HPP_INCLUDED
