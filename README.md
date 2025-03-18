@@ -1,4 +1,4 @@
-# vkPost
+# vkPost (WORK IN PROGRESS, NOT READY FOR TESTING, IT'S THE SAME AS VKBASALT FOR NOW)
 vkPost is a Vulkan post processing layer to enhance the visual graphics of games.
 
 Currently, the build in effects are:
