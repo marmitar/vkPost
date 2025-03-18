@@ -26,7 +26,7 @@
 #include "stb_image_dds.h"
 #include "stb_image_resize.h"
 
-namespace vkBasalt
+namespace vkPost
 {
     ReshadeEffect::ReshadeEffect(LogicalDevice*       pLogicalDevice,
                                  VkFormat             format,
@@ -1253,4 +1253,4 @@ namespace vkBasalt
             default: return VK_BLEND_FACTOR_ZERO;
         }
     }
-} // namespace vkBasalt
+} // namespace vkPost
