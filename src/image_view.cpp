@@ -1,6 +1,6 @@
 #include "image_view.hpp"
 
-namespace vkBasalt
+namespace vkPost
 {
     std::vector<VkImageView> createImageViews(LogicalDevice*       pLogicalDevice,
                                               VkFormat             format,
@@ -40,4 +40,4 @@ namespace vkBasalt
         return imageViews;
     }
 
-} // namespace vkBasalt
+} // namespace vkPost
