@@ -141,7 +141,7 @@ Based on vkBasalt, but takes the word Basalt out for Post, which hints at Post-P
 Yes.
 #### Will there be a openGl version?
 I will look into it. In the meantime if anyone wants to add it I will happily include it.
-#### Will you implement Wayland?
+#### Will you add  Wayland support?
 I will look into it. In the meantime if anyone wants to add it, they are free to contribute.
 #### Will there be a GUI in the future?
 Not for this project, but if anyone wants to make one they are free to.
