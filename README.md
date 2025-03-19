@@ -54,9 +54,13 @@ ASFLAGS=--32 CFLAGS=-m32 CXXFLAGS=-m32 PKG_CONFIG_PATH=/usr/lib32/pkgconfig meso
 ninja -C builddir.32 install
 ```
 
-## Packaging status
+## How To Install
 
-Coming Soon once adoption picks up
+Arch Linux (Temporary Until I Can Figure Out AUR):
+wget https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/vkpost-0.4.5-2-x86_64.pkg.tar.zst
+sudo pacman -U vkpost-0.4.5-2-x86_64.pkg.tar.zst
+
+Other Linux Distros Coming Soon (I need others who can publish to different distros)
 
 ## Usage
 Enable the layer with the environment variable.
