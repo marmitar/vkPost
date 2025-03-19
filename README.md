@@ -42,7 +42,7 @@ sudo pacman -U lib32-vkpost-0.4.5-2-x86_64.pkg.tar.zst
 
 ## How To Enable
 
-### Standard
+### <img style="width: 30px; height: 30px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/TerminalLogo.svg"> Standard
 When using the terminal or an application (.desktop) file, execute:
 ```ini
 ENABLE_VKPOST=1 yourgame
