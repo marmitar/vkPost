@@ -1,8 +1,6 @@
 # <img style="width: 50px; height: 50px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/vkPost_Logo.svg"> vkPost
 vkPost is a Vulkan post processing layer to enhance the visuals of games.
 
----------------------------------------------------------
-
 Currently, the built in effects are:
 - Contrast Adaptive Sharpening
 - Denoised Luma Sharpening
