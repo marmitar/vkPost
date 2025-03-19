@@ -1,6 +1,8 @@
 # <img style="width: 50px; height: 50px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/vkPost_Logo.svg"> vkPost
 vkPost is a Vulkan post processing layer to enhance the visuals of games.
 
+---------------------------------------------------------
+
 Currently, the built in effects are:
 - Contrast Adaptive Sharpening
 - Denoised Luma Sharpening
@@ -8,15 +10,21 @@ Currently, the built in effects are:
 - Enhanced Subpixel Morphological Anti-Aliasing
 - 3D color LookUp Table
 
+---------------------------------------------------------
+
 ## Disclaimer
 This project was originally created by [DadSchoorse](https://github.com/DadSchoorse/).
 
 vkPost is a continuation of where vkBasalt left off.
 
+---------------------------------------------------------
+
 ## How To Install
 
 ### Arch and Arch Based Distros (Temporary Until I Can Figure Out AUR):
 *Recommended To Install Both 64bit and 32bit Versions*
+> [!IMPORTANT]
+> Download [vkPost.conf](https://github.com/KowabungaOfficial/vkPost/blob/main/config/vkPost.conf) and place it in any of these [locations](https://github.com/KowabungaOfficial/vkPost/tree/main#configure) 
 
 64bit Version:
 ```
@@ -32,6 +40,91 @@ sudo pacman -U lib32-vkpost-0.4.5-2-x86_64.pkg.tar.zst
 
 ### Other Linux Distros Coming Soon (I need others who can publish to different distros):
 
+---------------------------------------------------------
+
+## How To Enable
+
+### Standard
+When using the terminal or an application (.desktop) file, execute:
+```ini
+ENABLE_VKPOST=1 yourgame
+```
+
+If you've enabled vkPost globally, you can disable it for a specific application using:
+
+```ini
+DISABLE_VKPOST=1 yourgame
+```
+
+### Steam
+With Steam, edit your launch options and add:
+```ini
+ENABLE_VKPOST=1 %command% 
+```
+
+### Lutris
+With Lutris, follow these steps below:
+1. Right click on a game, and press `configure`.
+2. Go to the `System options` tab and scroll down to `Environment variables`.
+3. Press on `Add`, and add `ENABLE_VKPOST` under `Key`, and add `1` under `Value`.
+
+### Heroic Games Launcher
+With Heroic Games Launcher, follow these steps below:
+
+For All Games:
+1. Go to `Settings` tab, then click `Game Defaults`
+2. Go to `ADVANCED` tab and scroll down to `Environment Variables`
+3. Add `ENABLE_VKPOST` to `Variable Name` and `Value` to `1`
+   
+Per Game Basis
+1. Right click on a game, then click on `Settings`
+2. Go to `ADVANCED` tab and scroll down to `Environment Variables`
+3. Add `ENABLE_VKPOST` to `Variable Name` and `Value` to `1`
+---------------------------------------------------------
+
+### Configuration Environment Variable
+To override some default config options use `VKPOST_CONFIG`,
+
+Here is an example, along with how to seperate effects by adding `;` 
+ 
+`VKPOST_CONFIG='effects=smaa:cas;casSharpness=1.0'`
+
+---------------------------------------------------------
+
+## Configure
+
+Settings like the CAS sharpening strength can be changed in the config file.
+The config file will be searched for in the following locations:
+* a file set with the environment variable`VKPOST_CONFIG_FILE=/path/to/vkPost.conf`
+* `vkPost.conf` in the working directory of the game
+* `$XDG_CONFIG_HOME/vkPost/vkPost.conf` or `~/.config/vkPost/vkPost.conf` if `XDG_CONFIG_HOME` is not set
+* `$XDG_DATA_HOME/vkPost/vkPost.conf` or `~/.local/share/vkPost/vkPost.conf` if `XDG_DATA_HOME` is not set
+* `/etc/vkPost.conf`
+* `/etc/vkPost/vkPost.conf`
+* `/usr/share/vkPost/vkPost.conf`
+
+If you want to make changes for one game only, you can create a file named `vkPost.conf` in the working directory of the game and change the values there.
+
+---------------------------------------------------------
+
+#### Reshade Fx shaders
+
+To run reshade fx shaders e.g. shaders from the [reshade repo](https://github.com/crosire/reshade-shaders), you have to set `reshadeTexturePath` and `reshadeIncludePath` to the matching dirctories from the repo. To then use a specific shader you need to set a custom effect name to the shader path and then add that effect name to `effects` like every other effect.
+
+```ini
+effects = colorfulness:denoise
+
+colorfulness = /home/user/reshade-shaders/Shaders/Colourfulness.fx
+denoise = /home/user/reshade-shaders/Shaders/Denoise.fx
+reshadeTexturePath = /home/user/reshade-shaders/Textures
+reshadeIncludePath = /home/user/reshade-shaders/Shaders
+```
+
+#### Ingame Input
+
+The [HOME](https://en.wikipedia.org/wiki/Home_key) key can be used to disable and re-enable the applied effects, the key can also be changed in the config file. This is based on X11 so it won't work on pure wayland. It **should** however at least not crash without X11.
+
+---------------------------------------------------------
 ## Building from Source
 
 ### Dependencies
@@ -72,72 +165,7 @@ Make sure that `PKG_CONFIG_PATH=/usr/lib32/pkgconfig` and `--libdir=lib32` are c
 ASFLAGS=--32 CFLAGS=-m32 CXXFLAGS=-m32 PKG_CONFIG_PATH=/usr/lib32/pkgconfig meson setup --prefix=/usr --buildtype=release --libdir=lib32 -Dwith_json=false builddir.32
 ninja -C builddir.32 install
 ```
-
-## Usage
-Enable the layer with the environment variable.
-
-### Standard
-When using the terminal or an application (.desktop) file, execute:
-```ini
-ENABLE_VKPOST=1 yourgame
-```
-
-If you've enabled vkPost globally, you can disable it for a specific application using:
-
-```ini
-DISABLE_VKPOST=1 yourgame
-```
-
-### Lutris
-With Lutris, follow these steps below:
-1. Right click on a game, and press `configure`.
-2. Go to the `System options` tab and scroll down to `Environment variables`.
-3. Press on `Add`, and add `ENABLE_VKPOST` under `Key`, and add `1` under `Value`.
-
-### Steam
-With Steam, edit your launch options and add:
-```ini
-ENABLE_VKPOST=1 %command% 
-```
-
-## Configure
-
-Settings like the CAS sharpening strength can be changed in the config file.
-The config file will be searched for in the following locations:
-* a file set with the environment variable`VKPOST_CONFIG_FILE=/path/to/vkPost.conf`
-* `vkPost.conf` in the working directory of the game
-* `$XDG_CONFIG_HOME/vkPost/vkPost.conf` or `~/.config/vkPost/vkPost.conf` if `XDG_CONFIG_HOME` is not set
-* `$XDG_DATA_HOME/vkPost/vkPost.conf` or `~/.local/share/vkPost/vkPost.conf` if `XDG_DATA_HOME` is not set
-* `/etc/vkPost.conf`
-* `/etc/vkPost/vkPost.conf`
-* `/usr/share/vkPost/vkPost.conf`
-
-If you want to make changes for one game only, you can create a file named `vkPost.conf` in the working directory of the game and change the values there.
-
-#### Quick override
-To override some default config options use `VKPOST_CONFIG`,
-
-Here is an example, along with how to seperate effects by adding `;` 
- 
-`VKPOST_CONFIG='effects=smaa:cas;casSharpness=1.0'`
-
-#### Reshade Fx shaders
-
-To run reshade fx shaders e.g. shaders from the [reshade repo](https://github.com/crosire/reshade-shaders), you have to set `reshadeTexturePath` and `reshadeIncludePath` to the matching dirctories from the repo. To then use a specific shader you need to set a custom effect name to the shader path and then add that effect name to `effects` like every other effect.
-
-```ini
-effects = colorfulness:denoise
-
-colorfulness = /home/user/reshade-shaders/Shaders/Colourfulness.fx
-denoise = /home/user/reshade-shaders/Shaders/Denoise.fx
-reshadeTexturePath = /home/user/reshade-shaders/Textures
-reshadeIncludePath = /home/user/reshade-shaders/Shaders
-```
-
-#### Ingame Input
-
-The [HOME](https://en.wikipedia.org/wiki/Home_key) key can be used to disable and re-enable the applied effects, the key can also be changed in the config file. This is based on X11 so it won't work on pure wayland. It **should** however at least not crash without X11.
-
+---------------------------------------------------------
 
 #### Debug Output
 
@@ -147,6 +175,7 @@ Possible values are: `trace, debug, info, warn, error, none`.
 
 By default the logger outputs to stderr, a file as output location can be set with the `VKPOST_LOG_FILE` env var, e.g. `VKPOST_LOG_FILE="vkPost.log"`.
 
+---------------------------------------------------------
 
 ## FAQ
 
@@ -162,3 +191,5 @@ I will look into it. In the meantime if anyone wants to add it, they are free to
 Not for this project, but if anyone wants to make one they are free to.
 #### Can you make reshade shaders work?
 If someone wants to add it they are free to.
+
+---------------------------------------------------------
