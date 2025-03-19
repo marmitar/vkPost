@@ -1,4 +1,4 @@
-# <img style="width: 50px; height: 50px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/vkPostLogo.svg"> vkPost
+# <img style="width: 50px; height: 50px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/vkPostLogo.svg">vkPost
 vkPost is a Vulkan post processing layer to enhance the visuals of games.
 
 Currently, the built in effects are:
