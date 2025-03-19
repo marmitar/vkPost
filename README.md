@@ -54,19 +54,19 @@ If you've enabled vkPost globally, you can disable it for a specific application
 DISABLE_VKPOST=1 yourgame
 ```
 
-### Steam
+### <img style="width: 30px; height: 30px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/SteamLogo.svg">  Steam
 With Steam, edit your launch options and add:
 ```ini
 ENABLE_VKPOST=1 %command% 
 ```
 
-### Lutris
+### <img style="width: 30px; height: 30px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/LutrisLogo.svg"> Lutris
 With Lutris, follow these steps below:
 1. Right click on a game, and press `configure`.
 2. Go to the `System options` tab and scroll down to `Environment variables`.
 3. Press on `Add`, and add `ENABLE_VKPOST` under `Key`, and add `1` under `Value`.
 
-### Heroic Games Launcher
+### <img style="width: 35px; height: 35px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/HeroicGamesLauncherLogo.svg">Heroic Games Launcher
 With Heroic Games Launcher, follow these steps below:
 
 For All Games:
