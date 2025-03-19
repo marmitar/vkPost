@@ -22,7 +22,7 @@ vkPost is a continuation of where vkBasalt left off.
 ### Arch and Arch Based Distros (Temporary Until I Can Figure Out AUR):
 *Recommended To Install Both 64bit and 32bit Versions*
 > [!IMPORTANT]
-> Download [vkPost.conf](https://github.com/KowabungaOfficial/vkPost/blob/main/config/vkPost.conf) and place it in any of these [locations](https://github.com/KowabungaOfficial/vkPost/tree/main#configure) 
+> Download [vkPost.conf](https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/vkPost.conf) and place it in any of these [locations](https://github.com/KowabungaOfficial/vkPost/tree/main#configure) 
 
 64bit Version:
 ```
