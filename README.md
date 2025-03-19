@@ -13,6 +13,16 @@ This project was originally created by [DadSchoorse](https://github.com/DadSchoo
 
 vkPost is a continuation of where vkBasalt left off.
 
+## How To Install
+
+### Arch Linux (Temporary Until I Can Figure Out AUR):
+```
+wget https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/vkpost-0.4.5-2-x86_64.pkg.tar.zst
+sudo pacman -U vkpost-0.4.5-2-x86_64.pkg.tar.zst
+```
+
+### Other Linux Distros Coming Soon (I need others who can publish to different distros):
+
 ## Building from Source
 
 ### Dependencies
@@ -53,14 +63,6 @@ Make sure that `PKG_CONFIG_PATH=/usr/lib32/pkgconfig` and `--libdir=lib32` are c
 ASFLAGS=--32 CFLAGS=-m32 CXXFLAGS=-m32 PKG_CONFIG_PATH=/usr/lib32/pkgconfig meson setup --prefix=/usr --buildtype=release --libdir=lib32 -Dwith_json=false builddir.32
 ninja -C builddir.32 install
 ```
-
-## How To Install
-
-Arch Linux (Temporary Until I Can Figure Out AUR):
-wget https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/vkpost-0.4.5-2-x86_64.pkg.tar.zst
-sudo pacman -U vkpost-0.4.5-2-x86_64.pkg.tar.zst
-
-Other Linux Distros Coming Soon (I need others who can publish to different distros)
 
 ## Usage
 Enable the layer with the environment variable.
