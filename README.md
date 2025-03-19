@@ -10,14 +10,14 @@ Currently, the built in effects are:
 
 ---------------------------------------------------------
 
-## Disclaimer
+## <img style="width: 18px; height: 18px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/vkPostRightArrow.svg"> Disclaimer
 This project was originally created by [DadSchoorse](https://github.com/DadSchoorse/).
 
 vkPost is a continuation of where vkBasalt left off.
 
 ---------------------------------------------------------
 
-## How To Install
+## <img style="width: 18px; height: 18px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/vkPostRightArrow.svg"> How To Install
 
 ### Arch and Arch Based Distros (Temporary Until I Can Figure Out AUR):
 *Recommended To Install Both 64bit and 32bit Versions*
@@ -40,7 +40,7 @@ sudo pacman -U lib32-vkpost-0.4.5-2-x86_64.pkg.tar.zst
 
 ---------------------------------------------------------
 
-## How To Enable
+## <img style="width: 18px; height: 18px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/vkPostRightArrow.svg"> How To Enable
 
 ### <img style="width: 30px; height: 30px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/TerminalLogo.svg"> Standard
 When using the terminal or an application (.desktop) file, execute:
@@ -78,7 +78,6 @@ Per Game Basis
 1. Right click on a game, then click on `Settings`
 2. Go to `ADVANCED` tab and scroll down to `Environment Variables`
 3. Add `ENABLE_VKPOST` to `Variable Name` and `Value` to `1`
----------------------------------------------------------
 
 ### Configuration Environment Variable
 To override some default config options use `VKPOST_CONFIG`,
@@ -89,7 +88,7 @@ Here is an example, along with how to seperate effects by adding `;`
 
 ---------------------------------------------------------
 
-## Configure
+## <img style="width: 18px; height: 18px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/vkPostRightArrow.svg"> Configure
 
 Settings like the CAS sharpening strength can be changed in the config file.
 The config file will be searched for in the following locations:
@@ -102,8 +101,6 @@ The config file will be searched for in the following locations:
 * `/usr/share/vkPost/vkPost.conf`
 
 If you want to make changes for one game only, you can create a file named `vkPost.conf` in the working directory of the game and change the values there.
-
----------------------------------------------------------
 
 #### Reshade Fx shaders
 
@@ -123,7 +120,7 @@ reshadeIncludePath = /home/user/reshade-shaders/Shaders
 The [HOME](https://en.wikipedia.org/wiki/Home_key) key can be used to disable and re-enable the applied effects, the key can also be changed in the config file. This is based on X11 so it won't work on pure wayland. It **should** however at least not crash without X11.
 
 ---------------------------------------------------------
-## Building from Source
+## <img style="width: 18px; height: 18px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/vkPostRightArrow.svg"> Building From Source And Debugging
 
 ### Dependencies
 Before building, you will need:
@@ -163,8 +160,6 @@ Make sure that `PKG_CONFIG_PATH=/usr/lib32/pkgconfig` and `--libdir=lib32` are c
 ASFLAGS=--32 CFLAGS=-m32 CXXFLAGS=-m32 PKG_CONFIG_PATH=/usr/lib32/pkgconfig meson setup --prefix=/usr --buildtype=release --libdir=lib32 -Dwith_json=false builddir.32
 ninja -C builddir.32 install
 ```
----------------------------------------------------------
-
 #### Debug Output
 
 The amount of debug output can be set with the `VKPOST_LOG_LEVEL` environment variable, e.g. `VKPOST_LOG_LEVEL=debug`. 
@@ -175,7 +170,7 @@ By default the logger outputs to stderr, a file as output location can be set wi
 
 ---------------------------------------------------------
 
-## FAQ
+## <img style="width: 18px; height: 18px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/vkPostRightArrow.svg"> FAQ
 
 #### Why is it called vkPost?
 Based on vkBasalt, but takes the word Basalt out for Post, which hints at Post-Processing.
