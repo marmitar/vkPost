@@ -15,7 +15,7 @@ vkPost is a continuation of where vkBasalt left off.
 
 ## How To Install
 
-### Arch Linux (Temporary Until I Can Figure Out AUR):
+### Arch and Arch Based Distros (Temporary Until I Can Figure Out AUR):
 *Recommended To Install Both 64bit and 32bit Versions*
 
 64bit Version:
