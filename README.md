@@ -16,9 +16,18 @@ vkPost is a continuation of where vkBasalt left off.
 ## How To Install
 
 ### Arch Linux (Temporary Until I Can Figure Out AUR):
+*Recommended To Install Both 64bit and 32bit Versions*
+
+64bit Version:
 ```
 wget https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/vkpost-0.4.5-2-x86_64.pkg.tar.zst
 sudo pacman -U vkpost-0.4.5-2-x86_64.pkg.tar.zst
+```
+
+32bit Version:
+```
+wget https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/lib32-vkpost-0.4.5-2-x86_64.pkg.tar.zst
+sudo pacman -U lib32-vkpost-0.4.5-2-x86_64.pkg.tar.zst
 ```
 
 ### Other Linux Distros Coming Soon (I need others who can publish to different distros):
