@@ -23,7 +23,7 @@ prepare() {
 }
 
 build() {
-  cd ${srcdir}/vkBasalt-${pkgver}
+  cd ${srcdir}/vkPost-${pkgver}
 
   ASFLAGS+=" --32" \
   CFLAGS+=" -m32" \
@@ -39,9 +39,9 @@ build() {
 }
 
 package() {
-  cd ${srcdir}/vkBasalt-${pkgver}
+  cd ${srcdir}/vkPost-${pkgver}
 
   DESTDIR="${pkgdir}" ninja -C build install
-  mv "${pkgdir}/usr/share/vulkan/implicit_layer.d/vkBasalt.json" "${pkgdir}/usr/share/vulkan/implicit_layer.d/vkBasalt.x86.json"
+  mv "${pkgdir}/usr/share/vulkan/implicit_layer.d/vkPost.json" "${pkgdir}/usr/share/vulkan/implicit_layer.d/vkpost.x86.json"
   install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
 }
