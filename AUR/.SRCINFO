@@ -1,20 +1,40 @@
-pkgbase = vkpost
-	pkgdesc = A Vulkan Post Processing Layer For Linux. Next Gen vkBasalt.
-	pkgver = 0.4.5
-	pkgrel = 2
-	url = https://github.com/KowabungaOfficial/vkPost
-	install = vkpost.install
-	arch = x86_64
-	license = zlib
-	makedepends = meson
-	makedepends = ninja
-	makedepends = spirv-headers
-	makedepends = vulkan-headers
-	depends = gcc-libs
-	depends = glslang
-	depends = libx11
-	optdepends = reshade-shaders-git
-	source = https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/vkPost-0.4.5.tar.gz
-	sha256sums = 81995306af4708c141515cafdf5b8bafa6e1bcd4ce7ae151de9d4e7bf9c9dfa7
+# Maintainer: KowabungaOfficial
+# contributors: KowabungaOfficial, yochananmarqos, bpierre, PedroHLC, rodrigo21
+pkgname='vkpost'
+pkgver=0.4.5
+pkgrel=2
+pkgdesc='A Vulkan Post Processing Layer For Linux. Next Gen vkBasalt.'
+arch=('x86_64')
+url='https://github.com/KowabungaOfficial/vkPost'
+license=('zlib')
+depends=('gcc-libs' 'glslang' 'libx11')
+makedepends=('meson' 'ninja' 'spirv-headers' 'vulkan-headers')
+optdepends=('reshade-shaders-git')
+source=("${url}/releases/download/v${pkgver}/vkPost-${pkgver}.tar.gz")
+sha256sums=('81995306af4708c141515cafdf5b8bafa6e1bcd4ce7ae151de9d4e7bf9c9dfa7')
+install=vkpost.install
 
-pkgname = vkpost
+prepare() {
+  cd "${srcdir}/vkPost-${pkgver}"
+  sed -i 's|/path/to/reshade-shaders/Textures|/opt/reshade/textures|g' \
+    "config/vkPost.conf"
+  sed -i 's|/path/to/reshade-shaders/Shaders|/opt/reshade/shaders|g' \
+    "config/vkPost.conf"
+}
+
+build() {
+  cd "${srcdir}/vkPost-${pkgver}"
+
+  arch-meson \
+    --buildtype=release \
+    build
+  ninja -C build
+}
+
+package() {
+  cd "${srcdir}/vkPost-${pkgver}"
+
+  DESTDIR="${pkgdir}" ninja -C build install
+  install -Dm 644 config/vkPost.conf "${pkgdir}/usr/share/vkPost/vkPost.conf.example"
+  install -Dm 644 LICENSE -t "${pkgdir}/usr/share/licenses/${pkgname}"
+}
