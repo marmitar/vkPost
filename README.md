@@ -178,6 +178,8 @@ Based on vkBasalt, but takes the word Basalt out for Post, which hints at Post-P
 Yes.
 #### Will there be a openGl version?
 I will look into it. In the meantime if anyone wants to add it I will happily include it.
+#### Will you support the Steam Deck
+Yes, I am working on a way to get it to work on steam deck. Check for updates in releases.
 #### Will you add  Wayland support?
 I will look into it. In the meantime if anyone wants to add it, they are free to contribute.
 #### Will there be a GUI in the future?
