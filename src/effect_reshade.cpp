@@ -234,7 +234,21 @@ namespace vkPost
                         break;
                 }
 
-                std::string          filePath = pConfig->getOption<std::string>("reshadeTexturePath") + "/" + source->value.string_data;
+                // TODO: fix me
+                std::filesystem::path reshadeReposPath("/usr/share/reshade");
+                std::filesystem::path reshadeRepoIdDefault("crosire/reshade-shaders");
+                std::filesystem::path reshadeRepoPathDefault(reshadeReposPath / reshadeRepoIdDefault);
+
+                std::filesystem::path reshadeIncludePathDefault(reshadeRepoPathDefault / "Shaders");
+                std::filesystem::path reshadeTexturePathDefault(reshadeRepoPathDefault / "Textures");
+                std::filesystem::path reshadeEffectsPathDefault(reshadeIncludePathDefault);
+
+                auto currEffectRepoId = pConfig->getOption<std::string>(effectName + "_repo_id", reshadeRepoIdDefault);
+
+                auto currEffectPath = reshadeReposPath / currEffectRepoId / "Shaders";
+                auto currEffectTexturesPath = reshadeReposPath / currEffectRepoId / "Textures";
+
+                std::string          filePath = currEffectTexturesPath / source->value.string_data;                
                 stbi_uc*             pixels;
                 std::vector<stbi_uc> resizedPixels;
                 uint32_t             size;
@@ -1118,8 +1132,19 @@ namespace vkPost
 
     void ReshadeEffect::createReshadeModule()
     {
-        std::string tempFile  = "/tmp/vkPost.spv";
-        std::string tempFile2 = "/tmp/vkPost.spv";
++        // TODO: fix me
++        std::filesystem::path reshadeReposPath("/usr/share/reshade");
++        std::filesystem::path reshadeRepoIdDefault("crosire/reshade-shaders");
++        std::filesystem::path reshadeRepoPathDefault(reshadeReposPath / reshadeRepoIdDefault);
++
++        std::filesystem::path reshadeIncludePathDefault(reshadeRepoPathDefault / "Shaders");
++        std::filesystem::path reshadeTexturePathDefault(reshadeRepoPathDefault / "Textures");
++        std::filesystem::path reshadeEffectsPathDefault(reshadeIncludePathDefault);
++
++        auto currEffectRepoId = pConfig->getOption<std::string>(effectName + "_repo_id", reshadeRepoIdDefault);
++
++        auto currEffectPath = reshadeReposPath / currEffectRepoId / "Shaders";
++        auto currEffectTexturesPath = reshadeReposPath / currEffectRepoId / "Textures";
 
         reshadefx::preprocessor preprocessor;
         preprocessor.add_macro_definition("__RESHADE__", std::to_string(INT_MAX));
@@ -1132,8 +1157,8 @@ namespace vkPost
         preprocessor.add_macro_definition("BUFFER_RCP_WIDTH", "(1.0 / BUFFER_WIDTH)");
         preprocessor.add_macro_definition("BUFFER_RCP_HEIGHT", "(1.0 / BUFFER_HEIGHT)");
         preprocessor.add_macro_definition("BUFFER_COLOR_DEPTH", (inputOutputFormatUNORM == VK_FORMAT_A2R10G10B10_UNORM_PACK32) ? "10" : "8");
-        preprocessor.add_include_path(pConfig->getOption<std::string>("reshadeIncludePath"));
-        if (!preprocessor.append_file(pConfig->getOption<std::string>(effectName)))
+        preprocessor.add_include_path(pConfig->getOption<std::string>("reshadeIncludePath", reshadeIncludePathDefault));
+        if (!preprocessor.append_file(currEffectPath / pConfig->getOption<std::string>(effectName)))
         {
             Logger::err("failed to load shader file: " + pConfig->getOption<std::string>(effectName));
             Logger::err("Does the filepath exist and does it not include spaces?");
