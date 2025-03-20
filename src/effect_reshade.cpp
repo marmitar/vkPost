@@ -248,6 +248,19 @@ namespace vkPost
                 auto currEffectPath = reshadeReposPath / currEffectRepoId / "Shaders";
                 auto currEffectTexturesPath = reshadeReposPath / currEffectRepoId / "Textures";
 
+                auto currEffectName = pConfig->getOption<std::string>(effectName);
+                auto currEffectFile = currEffectPath / currEffectName;
+
+                if (!std::filesystem::exists(currEffectFile))
+                    for(auto& p: std::filesystem::recursive_directory_iterator(reshadeReposPath))
+                        if (p.is_regular_file() || p.is_symlink())
+                            if (p.path().filename() == currEffectName)
+                            {
+                                currEffectTexturesPath = std::filesystem::absolute(p.path()).parent_path() / ".." / "Textures";
+                                Logger::info("using texture path: " + currEffectTexturesPath.string());
+                                break;
+                            }
+
                 std::string          filePath = currEffectTexturesPath / source->value.string_data;                
                 stbi_uc*             pixels;
                 std::vector<stbi_uc> resizedPixels;
@@ -1158,10 +1171,10 @@ namespace vkPost
         preprocessor.add_macro_definition("BUFFER_RCP_HEIGHT", "(1.0 / BUFFER_HEIGHT)");
         preprocessor.add_macro_definition("BUFFER_COLOR_DEPTH", (inputOutputFormatUNORM == VK_FORMAT_A2R10G10B10_UNORM_PACK32) ? "10" : "8");
         preprocessor.add_include_path(pConfig->getOption<std::string>("reshadeIncludePath", reshadeIncludePathDefault));
-        if (!preprocessor.append_file(currEffectPath / pConfig->getOption<std::string>(effectName)))
+        if (!preprocessor.append_file(currEffectFile))
         {
-            Logger::err("failed to load shader file: " + pConfig->getOption<std::string>(effectName));
-            Logger::err("Does the filepath exist and does it not include spaces?");
+             Logger::err("failed to load shader file: " + pConfig->getOption<std::string>(effectName));
+             Logger::err("Does the filepath exist and does it not include spaces?");
         }
 
         reshadefx::parser parser;
