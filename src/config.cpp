@@ -28,12 +28,12 @@ namespace vkPost
         // Allowed config paths
         const std::array<std::string, 7> configPath = {
             customConfigFile,                                    // custom config (VKPOST_CONFIG_FILE=/path/to/vkPost.conf)
-            "vkPost.conf",                                     // per game config
+            "vkPost.conf",                                       // per game config
             userXdgConfigFile,                                   // user-global config
             userConfigFile,                                      // legacy default config
-            std::string(SYSCONFDIR) + "/vkPost.conf",          // system-wide config
-            std::string(SYSCONFDIR) + "/vkPost/vkPost.conf", // system-wide config (alternative)
-            std::string(DATADIR) + "/vkPost/vkPost.conf",    // legacy system-wide config
+            std::string(SYSCONFDIR) + "/vkPost.conf",            // system-wide config
+            std::string(SYSCONFDIR) + "/vkPost/vkPost.conf",     // system-wide config (alternative)
+            std::string(DATADIR) + "/vkPost/vkPost.conf",        // legacy system-wide config
         };
 
         auto hasConfigFile = false;
