@@ -1,7 +1,7 @@
 # Maintainer: KowabungaOfficial
 # contributors: KowabungaOfficial, yochananmarqos, bpierre, PedroHLC, rodrigo21
 pkgname='lib32-vkpost'
-pkgver=0.4.5
+pkgver=0.4.6
 pkgrel=2
 pkgdesc='A Vulkan Post Processing Layer For Linux (32-bit). Next Gen vkBasalt.'
 arch=('x86_64')
@@ -11,7 +11,7 @@ depends=('lib32-glibc' 'lib32-gcc-libs' 'lib32-libx11' 'vkpost')
 makedepends=('meson' 'ninja' 'glslang' 'spirv-headers' 'vulkan-headers')
 optdepends=('reshade-shaders-git')
 source=("${url}/releases/download/v${pkgver}/vkPost-${pkgver}.tar.gz")
-sha256sums=('81995306af4708c141515cafdf5b8bafa6e1bcd4ce7ae151de9d4e7bf9c9dfa7')
+sha256sums=('827964fa67bcad0973f5245f1e2453aea0cbb104608e1fabbbb3b1cd55fffd14')
 
 prepare() {
   cd "${srcdir}/vkPost-${pkgver}"
