@@ -22,18 +22,18 @@ vkPost is a continuation of where vkBasalt left off.
 ### <img style="width: 30px; height: 30px;" src="https://github.com/KowabungaOfficial/vkPost/blob/main/misc/ArchLinuxLogo.svg"> Arch/Arch Based Distros (Temporary Until I Can Figure Out AUR):
 *Recommended To Install Both 64bit and 32bit Versions*
 > [!IMPORTANT]
-> Download [vkPost.conf](https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/vkPost.conf) and place it in any of these [locations](https://github.com/KowabungaOfficial/vkPost/tree/main#configure) 
+> Download [vkPost.conf](https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.6/vkPost.conf) and place it in any of these [locations](https://github.com/KowabungaOfficial/vkPost/tree/main#configure) 
 
 64bit Version:
 ```
-wget https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/vkpost-0.4.5-2-x86_64.pkg.tar.zst
-sudo pacman -U vkpost-0.4.5-2-x86_64.pkg.tar.zst
+wget https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.6/vkpost-0.4.6-2-x86_64.pkg.tar.zst
+sudo pacman -U vkpost-0.4.6-2-x86_64.pkg.tar.zst
 ```
 
 32bit Version:
 ```
-wget https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.5/lib32-vkpost-0.4.5-2-x86_64.pkg.tar.zst
-sudo pacman -U lib32-vkpost-0.4.5-2-x86_64.pkg.tar.zst
+wget https://github.com/KowabungaOfficial/vkPost/releases/download/v0.4.6/lib32-vkpost-0.4.6-2-x86_64.pkg.tar.zst
+sudo pacman -U lib32-vkpost-0.4.6-2-x86_64.pkg.tar.zst
 ```
 
 ### Other Linux Distros Coming Soon (I need others who can publish to different distros):
