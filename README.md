@@ -72,12 +72,12 @@ With Heroic Games Launcher, follow these steps below:
 For All Games:
 1. Go to `Settings` tab, then click `Game Defaults`
 2. Go to `ADVANCED` tab and scroll down to `Environment Variables`
-3. Add `ENABLE_VKPOST` to `Variable Name` and `Value` to `1`
+3. Add `ENABLE_VKPOST` to `Variable Name` and `1` to `Value`
    
 Per Game Basis
 1. Right click on a game, then click on `Settings`
 2. Go to `ADVANCED` tab and scroll down to `Environment Variables`
-3. Add `ENABLE_VKPOST` to `Variable Name` and `Value` to `1`
+3. Add `ENABLE_VKPOST` to `Variable Name` and `1` to `Value`
 
 ### Configuration Environment Variable
 To override some default config options use `VKPOST_CONFIG`,
