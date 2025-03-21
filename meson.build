@@ -1,6 +1,6 @@
 project('vkPost', ['c', 'cpp'],
     default_options: ['c_std=c11', 'cpp_std=c++2a'],
-    version: '0.4.4',
+    version: '0.4.6',
     license: 'Zlib'
 )
 
