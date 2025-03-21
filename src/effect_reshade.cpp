@@ -8,6 +8,7 @@
 #include <set>
 #include <variant>
 #include <algorithm>
+#include <string_view>
 
 #include "image_view.hpp"
 #include "descriptor_set.hpp"
@@ -1164,7 +1165,20 @@ namespace vkPost
         preprocessor.add_macro_definition("__RESHADE_PERFORMANCE_MODE__", "1");
         preprocessor.add_macro_definition("__RENDERER__", "0x20000");
         // TODO add more macros
+        auto effectDef = pConfig->getOption<std::string>(effectName + "_define");
+        if (!effectDef.empty())
+        {
+            std::string_view d = effectDef;
+            std::string_view v = effectDef;
 
+            d.remove_prefix(std::min(d.find_first_of("=")+1, d.size()));
+            v.remove_suffix(std::min(v.size()-v.find_first_of("="), v.size()));
+            if (!d.empty())
+            {
+                preprocessor.add_macro_definition(std::string(d), v.empty() ? "1" : std::string(v));
+            }
+        }
+        
         preprocessor.add_macro_definition("BUFFER_WIDTH", std::to_string(imageExtent.width));
         preprocessor.add_macro_definition("BUFFER_HEIGHT", std::to_string(imageExtent.height));
         preprocessor.add_macro_definition("BUFFER_RCP_WIDTH", "(1.0 / BUFFER_WIDTH)");
