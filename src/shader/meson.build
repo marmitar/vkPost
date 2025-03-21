@@ -14,9 +14,11 @@ shader_src = [
     'smaa_neighbor.vert.glsl',
 ]
 
+glsl_opt = get_option('optimize-shaders') ? ['-Os'] : []
+
 glsl_compiler = find_program('glslangValidator')
 glsl_generator = generator(glsl_compiler,
     output    : [ '@BASENAME@.h' ],
-    arguments : [ '-V', '-x', '@INPUT@', '-o', '@OUTPUT@' ])
+    arguments : [ '-V' ] + glsl_opt + [ '-x', '@INPUT@', '-o', '@OUTPUT@' ])
 
 shader_include = glsl_generator.process(shader_src)
