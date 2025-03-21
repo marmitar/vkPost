@@ -1186,7 +1186,7 @@ namespace vkPost
         }
 
         std::unique_ptr<reshadefx::codegen> codegen(reshadefx::create_codegen_spirv(
-            true /* vulkan semantics */, true /* debug info */, true /* uniforms to spec constants */, true /*flip vertex shader*/));
+            true /* vulkan semantics */, true /* debug info */, true /* uniforms to spec constants */, false /* enable_16bit_types */, true /*flip vertex shader*/));
         parser.parse(std::move(preprocessor.output()), codegen.get());
 
         errors = parser.errors();
