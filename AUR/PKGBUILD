@@ -1,7 +1,7 @@
 # Maintainer: KowabungaOfficial
 # contributors: KowabungaOfficial, yochananmarqos, bpierre, PedroHLC, rodrigo21
 pkgname='vkpost'
-pkgver=0.4.5
+pkgver=0.4.6
 pkgrel=2
 pkgdesc='A Vulkan Post Processing Layer For Linux. Next Gen vkBasalt.'
 arch=('x86_64')
