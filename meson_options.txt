@@ -1,3 +1,4 @@
+option('use-shared-reshade', type : 'boolean', value : false, description : 'Use shared ReshadeFX library')
 option('with_so', type: 'boolean', value: true, description: 'Build and install the vkPost library')
 option('with_json', type: 'boolean', value: true, description: 'Generate and install the vkPost.json layer file')
 option('append_libdir_vkpost', type: 'boolean', value: false, description: 'Append "vkpost" to libdir path (e.g., /usr/lib/vkpost)')
