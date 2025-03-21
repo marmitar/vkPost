@@ -7,6 +7,10 @@
     "api_version": "1.3.223",
     "implementation_version": "1",
     "description": "a post processing layer",
+    "functions": {
+      "vkGetInstanceProcAddr": "vkPost_GetInstanceProcAddr",
+      "vkGetDeviceProcAddr":   "vkPost_GetDeviceProcAddr"
+    },
     "enable_environment": {
       "ENABLE_VKPOST": "1"
     },
