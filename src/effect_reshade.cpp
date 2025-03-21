@@ -23,9 +23,9 @@
 
 #include "util.hpp"
 
-#include <stb/stb_image.h>
+#include "stb_image.h"
 #include "stb_image_dds.h"
-#include <stb/stb_image_resize2.h>
+#include "stb_image_resize.h"
 
 namespace vkPost
 {
