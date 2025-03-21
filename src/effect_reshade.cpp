@@ -418,7 +418,7 @@ namespace vkPost
                 attachmentDescription.format  = pass.srgb_write_enable ? textureFormatsSRGB[target] : textureFormatsUNORM[target];
                 attachmentDescription.samples = VK_SAMPLE_COUNT_1_BIT;
                 attachmentDescription.loadOp  = pass.clear_render_targets ? VK_ATTACHMENT_LOAD_OP_CLEAR
-                                                : pass.blend_enable       ? VK_ATTACHMENT_LOAD_OP_LOAD
+                                                : pass.blend_enable[i]    ? VK_ATTACHMENT_LOAD_OP_LOAD
                                                                           : VK_ATTACHMENT_LOAD_OP_DONT_CARE;
 
                 attachmentDescription.storeOp        = VK_ATTACHMENT_STORE_OP_STORE;
@@ -449,14 +449,14 @@ namespace vkPost
                 attachmentReferences.push_back(attachmentReference);
 
                 VkPipelineColorBlendAttachmentState colorBlendAttachment;
-                colorBlendAttachment.blendEnable         = pass.blend_enable;
-                colorBlendAttachment.srcColorBlendFactor = convertReshadeBlendFactor(pass.src_blend);
-                colorBlendAttachment.dstColorBlendFactor = convertReshadeBlendFactor(pass.dest_blend);
-                colorBlendAttachment.colorBlendOp        = convertReshadeBlendOp(pass.blend_op);
-                colorBlendAttachment.srcAlphaBlendFactor = convertReshadeBlendFactor(pass.src_blend_alpha);
-                colorBlendAttachment.dstAlphaBlendFactor = convertReshadeBlendFactor(pass.dest_blend_alpha);
-                colorBlendAttachment.alphaBlendOp        = convertReshadeBlendOp(pass.blend_op_alpha);
-                colorBlendAttachment.colorWriteMask      = pass.color_write_mask;
+                colorBlendAttachment.blendEnable         = pass.blend_enable[i];
+                colorBlendAttachment.srcColorBlendFactor = convertReshadeBlendFactor(pass.src_blend[i]);
+                colorBlendAttachment.dstColorBlendFactor = convertReshadeBlendFactor(pass.dest_blend[i]);
+                colorBlendAttachment.colorBlendOp        = convertReshadeBlendOp(pass.blend_op[i]);
+                colorBlendAttachment.srcAlphaBlendFactor = convertReshadeBlendFactor(pass.src_blend_alpha[i]);
+                colorBlendAttachment.dstAlphaBlendFactor = convertReshadeBlendFactor(pass.dest_blend_alpha[i]);
+                colorBlendAttachment.alphaBlendOp        = convertReshadeBlendOp(pass.blend_op_alpha[i]);
+                colorBlendAttachment.colorWriteMask      = pass.color_write_mask[i];
 
                 attachmentBlendStates.push_back(colorBlendAttachment);
 
@@ -1209,13 +1209,19 @@ namespace vkPost
             Logger::err(errors);
         }
         codegen->write_result(module);
+        
+        std::vector<uint32_t> spirv(
+            reinterpret_cast<const uint32_t *>(module.code.data()),
+            reinterpret_cast<const uint32_t *>(module.code.data() + module.code.size()));
+        // cso.resize(spirv.size() * sizeof(uint32_t));
+        // std::memcpy(cso.data(), spirv.data(), cso.size());
 
         VkShaderModuleCreateInfo shaderCreateInfo;
         shaderCreateInfo.sType    = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;
         shaderCreateInfo.pNext    = nullptr;
         shaderCreateInfo.flags    = 0;
-        shaderCreateInfo.codeSize = module.spirv.size() * sizeof(uint32_t);
-        shaderCreateInfo.pCode    = module.spirv.data();
+        shaderCreateInfo.codeSize = spirv.size() * sizeof(uint32_t);
+        shaderCreateInfo.pCode    = spirv.data();
 
         VkResult result = pLogicalDevice->vkd.CreateShaderModule(pLogicalDevice->device, &shaderCreateInfo, nullptr, &shaderModule);
         ASSERT_VULKAN(result);
@@ -1266,11 +1272,11 @@ namespace vkPost
             case reshadefx::pass_stencil_op::zero: return VK_STENCIL_OP_ZERO;
             case reshadefx::pass_stencil_op::keep: return VK_STENCIL_OP_KEEP;
             case reshadefx::pass_stencil_op::replace: return VK_STENCIL_OP_REPLACE;
-            case reshadefx::pass_stencil_op::incr_sat: return VK_STENCIL_OP_INCREMENT_AND_CLAMP;
-            case reshadefx::pass_stencil_op::decr_sat: return VK_STENCIL_OP_DECREMENT_AND_CLAMP;
+            case reshadefx::pass_stencil_op::increment_saturate: return VK_STENCIL_OP_INCREMENT_AND_CLAMP;
+            case reshadefx::pass_stencil_op::decrement_saturate: return VK_STENCIL_OP_DECREMENT_AND_CLAMP;
             case reshadefx::pass_stencil_op::invert: return VK_STENCIL_OP_INVERT;
-            case reshadefx::pass_stencil_op::incr: return VK_STENCIL_OP_INCREMENT_AND_WRAP;
-            case reshadefx::pass_stencil_op::decr: return VK_STENCIL_OP_DECREMENT_AND_WRAP;
+            case reshadefx::pass_stencil_op::increment: return VK_STENCIL_OP_INCREMENT_AND_WRAP;
+            case reshadefx::pass_stencil_op::decrement: return VK_STENCIL_OP_DECREMENT_AND_WRAP;
             default: return VK_STENCIL_OP_KEEP;
         }
     }
@@ -1281,27 +1287,27 @@ namespace vkPost
         {
             case reshadefx::pass_blend_op::add: return VK_BLEND_OP_ADD;
             case reshadefx::pass_blend_op::subtract: return VK_BLEND_OP_SUBTRACT;
-            case reshadefx::pass_blend_op::rev_subtract: return VK_BLEND_OP_REVERSE_SUBTRACT;
+            case reshadefx::pass_blend_op::reverse_subtract: return VK_BLEND_OP_REVERSE_SUBTRACT;
             case reshadefx::pass_blend_op::min: return VK_BLEND_OP_MIN;
             case reshadefx::pass_blend_op::max: return VK_BLEND_OP_MAX;
             default: return VK_BLEND_OP_ADD;
         }
     }
 
-    VkBlendFactor ReshadeEffect::convertReshadeBlendFactor(reshadefx::pass_blend_func blendFactor)
+    VkBlendFactor ReshadeEffect::convertReshadeBlendFactor(reshadefx::pass_blend_factor blendFactor)
     {
         switch (blendFactor)
         {
-            case reshadefx::pass_blend_func::zero: return VK_BLEND_FACTOR_ZERO;
-            case reshadefx::pass_blend_func::one: return VK_BLEND_FACTOR_ONE;
-            case reshadefx::pass_blend_func::src_color: return VK_BLEND_FACTOR_SRC_COLOR;
-            case reshadefx::pass_blend_func::src_alpha: return VK_BLEND_FACTOR_SRC_ALPHA;
-            case reshadefx::pass_blend_func::inv_src_color: return VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR;
-            case reshadefx::pass_blend_func::inv_src_alpha: return VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-            case reshadefx::pass_blend_func::dst_alpha: return VK_BLEND_FACTOR_DST_ALPHA;
-            case reshadefx::pass_blend_func::inv_dst_alpha: return VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA;
-            case reshadefx::pass_blend_func::dst_color: return VK_BLEND_FACTOR_DST_COLOR;
-            case reshadefx::pass_blend_func::inv_dst_color: return VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR;
+            case reshadefx::pass_blend_factor::zero: return VK_BLEND_FACTOR_ZERO;
+            case reshadefx::pass_blend_factor::one: return VK_BLEND_FACTOR_ONE;
+            case reshadefx::pass_blend_factor::source_color: return VK_BLEND_FACTOR_SRC_COLOR;
+            case reshadefx::pass_blend_factor::source_alpha: return VK_BLEND_FACTOR_SRC_ALPHA;
+            case reshadefx::pass_blend_factor::one_minus_source_color: return VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR;
+            case reshadefx::pass_blend_factor::one_minus_source_alpha: return VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
+            case reshadefx::pass_blend_factor::dest_alpha: return VK_BLEND_FACTOR_DST_ALPHA;
+            case reshadefx::pass_blend_factor::one_minus_dest_alpha: return VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA;
+            case reshadefx::pass_blend_factor::dest_color: return VK_BLEND_FACTOR_DST_COLOR;
+            case reshadefx::pass_blend_factor::one_minus_dest_color: return VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR;
             default: return VK_BLEND_FACTOR_ZERO;
         }
     }
