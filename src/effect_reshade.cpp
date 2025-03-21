@@ -8,7 +8,6 @@
 #include <set>
 #include <variant>
 #include <algorithm>
-#include <string_view>
 
 #include "image_view.hpp"
 #include "descriptor_set.hpp"
@@ -489,10 +488,7 @@ namespace vkPost
             if (scissor.extent.width == imageExtent.width && scissor.extent.height == imageExtent.height)
             {
                 depthAttachmentCount = 1;
-shaderCreateInfo.codeSize = module.spirv.size() * sizeof(uint32_t);
- 
 
-        shaderCreateInfo.pCode    = module.spirv.data();
                 attachmentImageViews.push_back(std::vector<VkImageView>(inputImages.size(), stencilImageView));
 
                 VkAttachmentReference attachmentReference;
@@ -850,7 +846,7 @@ shaderCreateInfo.codeSize = module.spirv.size() * sizeof(uint32_t);
                         writeDescriptorSet.sType            = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
                         writeDescriptorSet.pNext            = nullptr;
                         writeDescriptorSet.dstSet           = inputDescriptorSets[j];
-                        writeDescriptorSet.dstBinding       = info.binding;
+                        writeDescriptorSet.dstBinding       = i;
                         writeDescriptorSet.dstArrayElement  = 0;
                         writeDescriptorSet.descriptorCount  = 1;
                         writeDescriptorSet.descriptorType   = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
@@ -1168,20 +1164,7 @@ shaderCreateInfo.codeSize = module.spirv.size() * sizeof(uint32_t);
         preprocessor.add_macro_definition("__RESHADE_PERFORMANCE_MODE__", "1");
         preprocessor.add_macro_definition("__RENDERER__", "0x20000");
         // TODO add more macros
-        auto effectDef = pConfig->getOption<std::string>(effectName + "_define");
-        if (!effectDef.empty())
-        {
-            std::string_view d = effectDef;
-            std::string_view v = effectDef;
 
-            d.remove_prefix(std::min(d.find_first_of("=")+1, d.size()));
-            v.remove_suffix(std::min(v.size()-v.find_first_of("="), v.size()));
-            if (!d.empty())
-            {
-                preprocessor.add_macro_definition(std::string(d), v.empty() ? "1" : std::string(v));
-            }
-        }
-        
         preprocessor.add_macro_definition("BUFFER_WIDTH", std::to_string(imageExtent.width));
         preprocessor.add_macro_definition("BUFFER_HEIGHT", std::to_string(imageExtent.height));
         preprocessor.add_macro_definition("BUFFER_RCP_WIDTH", "(1.0 / BUFFER_WIDTH)");
@@ -1202,8 +1185,8 @@ shaderCreateInfo.codeSize = module.spirv.size() * sizeof(uint32_t);
             Logger::err(errors);
         }
 
-        std::unique_ptr<reshadefx::codegen> codegen(
-        reshadefx::create_codegen_spirv(true /* vulkan semantics */, true /* debug info */, true /* uniforms to spec constants */, false /* enable_16bit_types */, true /*flip vertex shader*/));
+        std::unique_ptr<reshadefx::codegen> codegen(reshadefx::create_codegen_spirv(
+            true /* vulkan semantics */, true /* debug info */, true /* uniforms to spec constants */, false /* enable_16bit_types */, true /*flip vertex shader*/));
         parser.parse(std::move(preprocessor.output()), codegen.get());
 
         errors = parser.errors();
@@ -1295,16 +1278,16 @@ shaderCreateInfo.codeSize = module.spirv.size() * sizeof(uint32_t);
     {
         switch (blendFactor)
         {
-            case reshadefx::pass_blend_factor::zero: return VK_BLEND_FACTOR_ZERO;
-            case reshadefx::pass_blend_factor::one: return VK_BLEND_FACTOR_ONE;
-            case reshadefx::pass_blend_factor::source_color: return VK_BLEND_FACTOR_SRC_COLOR;
-            case reshadefx::pass_blend_factor::source_alpha: return VK_BLEND_FACTOR_SRC_ALPHA;
-            case reshadefx::pass_blend_factor::one_minus_source_color: return VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR;
-            case reshadefx::pass_blend_factor::one_minus_source_alpha: return VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
-            case reshadefx::pass_blend_factor::dest_alpha: return VK_BLEND_FACTOR_DST_ALPHA;
-            case reshadefx::pass_blend_factor::one_minus_dest_alpha: return VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA;
-            case reshadefx::pass_blend_factor::dest_color: return VK_BLEND_FACTOR_DST_COLOR;
-            case reshadefx::pass_blend_factor::one_minus_dest_color: return VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR;
+            case reshadefx::pass_blend_func::zero: return VK_BLEND_FACTOR_ZERO;
+            case reshadefx::pass_blend_func::one: return VK_BLEND_FACTOR_ONE;
+            case reshadefx::pass_blend_func::src_color: return VK_BLEND_FACTOR_SRC_COLOR;
+            case reshadefx::pass_blend_func::src_alpha: return VK_BLEND_FACTOR_SRC_ALPHA;
+            case reshadefx::pass_blend_func::inv_src_color: return VK_BLEND_FACTOR_ONE_MINUS_SRC_COLOR;
+            case reshadefx::pass_blend_func::inv_src_alpha: return VK_BLEND_FACTOR_ONE_MINUS_SRC_ALPHA;
+            case reshadefx::pass_blend_func::dst_alpha: return VK_BLEND_FACTOR_DST_ALPHA;
+            case reshadefx::pass_blend_func::inv_dst_alpha: return VK_BLEND_FACTOR_ONE_MINUS_DST_ALPHA;
+            case reshadefx::pass_blend_func::dst_color: return VK_BLEND_FACTOR_DST_COLOR;
+            case reshadefx::pass_blend_func::inv_dst_color: return VK_BLEND_FACTOR_ONE_MINUS_DST_COLOR;
             default: return VK_BLEND_FACTOR_ZERO;
         }
     }
