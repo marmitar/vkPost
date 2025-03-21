@@ -1,5 +1,11 @@
 subdir('shader')
-subdir('reshade')
+
+
+if (get_option('use-shared-reshade'))
+    reshade_dep = dependency('ReShadeFX')
+else
+    subdir('reshade')
+endif
 
 vkPost_src = [
     'buffer.cpp',
