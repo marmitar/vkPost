@@ -11,7 +11,7 @@ depends=('lib32-glibc' 'lib32-gcc-libs' 'lib32-libx11')
 makedepends=('meson' 'ninja' 'glslang' 'spirv-headers' 'vulkan-headers')
 optdepends=('reshade-shaders-git')
 source=("${url}/releases/download/v${pkgver}/vkPost-${pkgver}.tar.gz")
-sha256sums=('750e4098f9a8c14e358f4232cac817db65df9015f2deccc07658dfa19c522ee8')
+sha256sums=('2cb8fec04324232bf20c25e3db804a01a6828b618ce3575bd5812f0bd481f56b')
 
 prepare() {
   cd "${srcdir}/vkPost-${pkgver}"
