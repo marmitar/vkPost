@@ -1,6 +1,5 @@
 subdir('shader')
 
-
 if (get_option('use-shared-reshade'))
     reshade_dep = dependency('ReShadeFX')
 else
