@@ -847,7 +847,7 @@ namespace vkPost
                         writeDescriptorSet.sType            = VK_STRUCTURE_TYPE_WRITE_DESCRIPTOR_SET;
                         writeDescriptorSet.pNext            = nullptr;
                         writeDescriptorSet.dstSet           = inputDescriptorSets[j];
-                        writeDescriptorSet.dstBinding       = i;
+                        writeDescriptorSet.dstBinding       = info.binding;
                         writeDescriptorSet.dstArrayElement  = 0;
                         writeDescriptorSet.descriptorCount  = 1;
                         writeDescriptorSet.descriptorType   = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
